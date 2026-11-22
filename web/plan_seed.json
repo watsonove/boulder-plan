@@ -1,0 +1,805 @@
+{
+  "version": 2,
+  "name": "Boulder Plan · 12 Wochen nach Niveau",
+  "_doc": "Grundlage: docs/training-research.md. Stufen 1–5 = Einsteiger, Aufbau, Mittel, Fortgeschritten, Leistung. In Texten steht {G} für den gewählten Grad, {G+1}/{G-2} für Grade darüber/darunter. parametersByLevel: Schlüssel = ab dieser Stufe; höhere Stufen erben von niedrigeren, außer sie setzen eine neue Übung (exercise).",
+
+  "phases": [
+    { "id": "base",   "name": "Basis",                  "color": "blue",   "description": "Volumen, Technik, Repeaters und Hypertrophie (3×8–10).",
+      "byLevel": {
+        "1": { "name": "Technik & Volumen", "description": "Viele Boulder knapp unter deinem Grad, alle Stile, präzise Füße. Grundkraft mit Körpergewicht." },
+        "3": { "name": "Basis", "description": "Volumen, Technik und Repeaters (Fingerkraft-Ausdauer) mit Körpergewicht." },
+        "4": { "name": "Basis", "description": "Volumen, Technik, Repeaters und Hypertrophie (3×8–10)." } } },
+    { "id": "deload", "name": "Deload",                 "color": "gray",   "description": "Ca. 40 % weniger Volumen, keine Limit-Versuche. Erholen und Anpassungen festigen." },
+    { "id": "max",    "name": "Maximalkraft",           "color": "red",    "description": "Limit-Boulder, Max Hangs mit Zusatzgewicht, schwere Klimmzüge 5×3.",
+      "byLevel": {
+        "1": { "name": "Projektieren & Grundkraft", "description": "Boulder einen Grad über deinem Niveau ausbouldern, Klimmzüge und Antagonisten steigern." },
+        "3": { "name": "Maximalkraft", "description": "Limit-Boulder am Board, Max Hangs mit Körpergewicht, Klimmzüge 4×5." },
+        "4": { "name": "Maximalkraft", "description": "Limit-Boulder, Max Hangs mit Zusatzgewicht, schwere Klimmzüge 5×3." } } },
+    { "id": "power",  "name": "Power & Power-Ausdauer", "color": "orange", "description": "Explosive Board-Boulder, Campus mit Füßen, Linked Boulders und 30/30-Circuits.",
+      "byLevel": {
+        "1": { "name": "Dynamik & Ausdauer", "description": "Dynamische Züge, Deadpoints, sauber landen und leichte Boulder-Runden." },
+        "3": { "name": "Power & Power-Ausdauer", "description": "Explosive Board-Boulder, Linked Boulders und 30/30-Circuits." },
+        "4": { "name": "Power & Power-Ausdauer", "description": "Explosive Board-Boulder, Campus mit Füßen, Linked Boulders und 30/30-Circuits." } } },
+    { "id": "test",   "name": "Taper & Test",           "color": "green",  "description": "Volumen runter, frisch werden und die Benchmarks aus Woche 1 wiederholen." }
+  ],
+
+  "weeks": [
+    { "week": 1,  "phase": "base",   "focus": "Einstieg + Benchmarks: Max Hang, 3RM Klimmzüge, Moon- und Kilter-Grad festhalten.",
+      "focusByLevel": { "1": "Einstieg: Grad-Pyramide und Klimmzüge testen, viele Stile ausprobieren.", "3": "Einstieg + Benchmarks: Max Hang, 3RM Klimmzüge, Moon- und Kilter-Grad festhalten." } },
+    { "week": 2,  "phase": "base",   "focus": "Volumen aufbauen, Repeaters 7/3, Hypertrophie 3×8–10.",
+      "focusByLevel": { "1": "Volumen: viele Boulder knapp unter deinem Grad, Füße präzise und leise setzen.", "3": "Volumen und Repeaters: Fingerkraft-Ausdauer mit Körpergewicht aufbauen." } },
+    { "week": 3,  "phase": "base",   "focus": "Höchstes Basisvolumen – Repeaters sauber, Lasten leicht steigern.",
+      "focusByLevel": { "1": "Volumen steigern, erste Projekte einen Grad über deinem Niveau.", "3": "Höchstes Basisvolumen – Repeaters sauber, nie bis zum Versagen." } },
+    { "week": 4,  "phase": "deload", "focus": "Deload: ca. 40 % weniger Volumen, keine Limit-Versuche.",
+      "focusByLevel": { "1": "Deload: weniger Boulder, nur saubere Bewegung und Spaß." } },
+    { "week": 5,  "phase": "max",    "focus": "Maximalkraft 1: Arbeitslasten für Max Hangs und Klimmzüge etablieren.",
+      "focusByLevel": { "1": "Projektieren 1: Boulder einen Grad über deinem Niveau in Einzelzüge zerlegen.", "3": "Maximalkraft 1: Max Hangs mit Körpergewicht, passende Leiste finden." } },
+    { "week": 6,  "phase": "max",    "focus": "Maximalkraft 2: Lasten um 2,5 kg steigern, Limit-Boulder bis zwei Grade über deinem Niveau.",
+      "focusByLevel": { "1": "Projektieren 2: Taktik – Züge einzeln lösen, Pausen bewusst nutzen.", "3": "Maximalkraft 2: kleinere Leiste oder weniger Entlastung, Limit-Boulder." } },
+    { "week": 7,  "phase": "max",    "focus": "Maximalkraft 3: Peak-Woche – volle Pausen, maximale Qualität.",
+      "focusByLevel": { "1": "Projektieren 3: Projekte durchsteigen, Klimmzüge steigern." } },
+    { "week": 8,  "phase": "deload", "focus": "Deload: regenerieren, Bewegungsqualität, keine Limit-Versuche.",
+      "focusByLevel": { "1": "Deload: regenerieren, Technik-Drills, keine Projekte." } },
+    { "week": 9,  "phase": "power",  "focus": "Power 1: Explosivität auf dem Kilter, Campus mit Füßen einführen.",
+      "focusByLevel": { "1": "Dynamik 1: Schwung, Deadpoints, kontrolliert landen.", "3": "Power 1: explosive Board-Boulder, volle Pausen." } },
+    { "week": 10, "phase": "power",  "focus": "Power 2: Power-Ausdauer mit Linked Boulders und 30/30-Circuits.",
+      "focusByLevel": { "1": "Dynamik 2: leichte Boulder-Runden für die Ausdauer." } },
+    { "week": 11, "phase": "power",  "focus": "Power 3: Peak – härteste Power-Boulder, Volumen kontrolliert.",
+      "focusByLevel": { "1": "Dynamik 3: Lieblingsprojekte und Runden kombinieren." } },
+    { "week": 12, "phase": "test",   "focus": "Taper & Test: frisch sein und die Benchmarks aus Woche 1 wiederholen.",
+      "focusByLevel": { "1": "Test: frisch werden, Grad-Pyramide und Klimmzüge wiederholen." } }
+  ],
+
+  "sessionTypes": {
+    "A": { "title": "Limit & Finger",              "subtitle": "Fingerkraft, Board-Limit, Klimmzüge",                       "estimatedMinutes": 120,
+      "byLevel": { "1": { "title": "Projektieren & Technik", "subtitle": "Boulder über deinem Niveau, Technik-Drills" }, "3": { "title": "Limit & Finger", "subtitle": "Fingerkraft, Board-Limit, Klimmzüge" } } },
+    "B": { "title": "Kraft & Antagonisten",        "subtitle": "Zugkraft, Drücken, Schultern, Core",                       "estimatedMinutes": 75,
+      "byLevel": { "1": { "title": "Grundkraft & Antagonisten" }, "3": { "title": "Kraft & Antagonisten" } } },
+    "C": { "title": "Kilter Power",                "subtitle": "Kurze explosive Boulder am Board",                          "estimatedMinutes": 75,
+      "byLevel": { "1": { "title": "Technik & Volumen", "subtitle": "Viele Boulder, alle Stile" }, "3": { "title": "Kilter Power", "subtitle": "Kurze explosive Boulder am Board" } } },
+    "D": { "title": "Kraftausdauer & Volumen",     "subtitle": "4×4, Linked Boulders, 30/30-Circuits",                    "estimatedMinutes": 75,
+      "byLevel": { "1": { "title": "Ausdauer & Spiel", "subtitle": "Leichte Boulder-Runden" }, "2": { "title": "Kraftausdauer & Volumen", "subtitle": "4×4, 30/30-Circuits" } } },
+    "E": { "title": "Mobility & Regeneration",     "subtitle": "Optional, 20 min: Hüfte, Schultern, Unterarme",           "estimatedMinutes": 20 },
+    "T": { "title": "Technik & Volumen (Kilter)",  "gymTitle": "Technik & Volumen (Halle)", "subtitle": "Zusatztag bei 5 Trainingstagen", "estimatedMinutes": 70 }
+  },
+
+  "weekLayouts": {
+    "3": {
+      "defaultWeekdays": [1, 3, 5],
+      "slots": [["A"], ["B"], ["C", "D"]],
+      "weekOverrides": { "12": [["A"], ["B"], ["C"]] }
+    },
+    "4": {
+      "defaultWeekdays": [1, 2, 4, 6],
+      "slots": [["A"], ["B"], ["C"], ["D"]]
+    },
+    "5": {
+      "minLevel": 3,
+      "defaultWeekdays": [1, 2, 3, 5, 6],
+      "slots": [["A"], ["B"], ["T"], ["C"], ["D"]]
+    }
+  },
+
+  "exercises": {
+    "warmup_routine": {
+      "name": "Warm-up-Routine",
+      "category": "warmup",
+      "description": "5 min Puls hoch (Seilspringen, Hampelmänner), Schulter- und Handgelenkmobilisation (Armkreisen, Band-Pull-Aparts), Sehnengleiten der Finger, dann leichte Boulder steigend bis knapp unter deinen Grad. Vor Hangboard oder Limit-Bouldern zum Schluss 2–3 progressive Belastungen an Leisten (z. B. 3 × 5 s Hängen mit Füßen). Kein langes statisches Dehnen vor Maximalbelastung.",
+      "alternatives": ["warmup_short"]
+    },
+    "warmup_short": {
+      "name": "Kurzes Warm-up",
+      "category": "warmup",
+      "description": "10 min: Puls hoch, Schultermobilisation mit Band, je 2 lockere Sätze Klimmzüge und Push-ups, 2 × 20 s Ring-Support.",
+      "alternatives": ["warmup_routine"]
+    },
+
+    "volume_bouldering": {
+      "name": "Volumen-Bouldern",
+      "category": "technique",
+      "minLevel": 1,
+      "description": "Viele Boulder knapp unter deinem Grad in allen Stilen: Platte, senkrecht, Überhang, Dach, Kompression. Vor jedem Versuch lesen, Füße präzise und leise setzen. In der Halle oder am Kilter mit flachem Winkel (20–30°).",
+      "alternatives": ["kilter_technique", "gym_technique"]
+    },
+    "projecting": {
+      "name": "Projektieren",
+      "category": "technique",
+      "minLevel": 1,
+      "description": "2–3 Boulder einen Grad über deinem Niveau ausbouldern: Züge einzeln lösen, dann verbinden. Höchstens 4 Versuche pro Boulder und Tag, volle Pausen. In der Halle oder am Kilter mit flachem Winkel.",
+      "warnings": ["Abbrechen, sobald die Züge unsauber werden.", "Kleine Leisten nicht im Vollkrimp bis zum Anschlag halten."],
+      "alternatives": ["gym_limit", "volume_bouldering"]
+    },
+    "easy_circuits": {
+      "name": "Leichte Boulder-Runden",
+      "category": "technique",
+      "minLevel": 1,
+      "description": "4–5 leichte Boulder direkt hintereinander klettern (= 1 Runde), danach Pause. Ziel: Ausdauer und flüssige Bewegung, nicht Maximalkraft. Die letzte Runde soll sich anstrengend, aber sauber anfühlen.",
+      "alternatives": ["kilter_4x4", "gym_4x4"]
+    },
+
+    "assisted_hangs": {
+      "name": "Hängen mit Fußentlastung",
+      "category": "fingers",
+      "minLevel": 2, "minYears": 1, "fingerIntense": true,
+      "timer": { "type": "interval", "work": 10, "rest": 0, "reps": 1 },
+      "description": "Große Leiste (20–25 mm) im Halbkrimp oder offenen Griff, ein oder beide Füße auf einem Stuhl bzw. Kasten. So viel Gewicht abgeben, dass sich 10 s leicht bis mittel anfühlen (RPE 5–6). Ziel: Sehnen und Ringbänder an die Belastung gewöhnen.",
+      "warnings": ["Nur ausgeruht, nie bei Fingerschmerz.", "Kein Vollkrimp (Daumen über dem Zeigefinger)."],
+      "alternatives": []
+    },
+    "repeaters_7_3": {
+      "name": "Repeaters 7/3",
+      "category": "fingers",
+      "minLevel": 3, "minYears": 1, "fingerIntense": true,
+      "timer": { "type": "interval", "work": 7, "rest": 3, "reps": 6 },
+      "description": "6 × (7 s hängen, 3 s Pause) = 1 Satz. Halbkrimp oder offener Griff, Schultern aktiv. Leiste bzw. Entlastung so wählen, dass alle 6 Hangs gerade noch sauber gelingen.",
+      "warnings": ["Nicht bis zum Versagen hängen.", "Höchstens 2 Hangboard-Einheiten pro Woche, 48 h Abstand."],
+      "alternatives": ["moon_edge_holds"]
+    },
+    "max_hangs_bw": {
+      "name": "Max Hangs (Körpergewicht)",
+      "category": "fingers",
+      "minLevel": 3, "minYears": 1, "fingerIntense": true,
+      "timer": { "type": "interval", "work": 10, "rest": 0, "reps": 1 },
+      "description": "10 s an der kleinsten Leiste, die du knapp 13 s halten könntest (3 s Reserve). Ohne Zusatzgewicht; wenn nötig mit Fußentlastung oder Flaschenzug. Halbkrimp, Schultern aktiv, Körper ruhig.",
+      "warnings": ["Nur ausgeruht, nie nach harten Bouldern.", "Fingerschmerz = sofort aufhören.", "Kein Vollkrimp."],
+      "alternatives": ["moon_edge_holds"]
+    },
+    "max_hangs_20mm": {
+      "name": "Max Hangs 20 mm",
+      "category": "fingers",
+      "minLevel": 4, "minYears": 2, "fingerIntense": true, "noYouth": true,
+      "timer": { "type": "interval", "work": 10, "rest": 0, "reps": 1 },
+      "description": "Halbkrimp an der 20-mm-Leiste, beidhändig, 10 s hängen. Schultern aktiv, Körper ruhig. Zusatzgewicht über den Gürtel so wählen, dass die angegebene RPE passt (RPE 8 ≈ noch 2 s Reserve).",
+      "warnings": ["Nur ausgeruht, nie nach harten Bouldern.", "Gewicht höchstens in 2,5-kg-Schritten steigern.", "Fingerschmerz = sofort aufhören."],
+      "alternatives": ["moon_edge_holds"]
+    },
+    "hangs_7_53": {
+      "name": "Max Hangs 7-53",
+      "category": "fingers",
+      "minLevel": 5, "minYears": 2, "fingerIntense": true, "noYouth": true,
+      "timer": { "type": "interval", "work": 7, "rest": 53, "reps": 3 },
+      "description": "3 × (7 s hängen, 53 s Pause) = 1 Satz. Last so wählen, dass du sie höchstens 10 s halten könntest. Halbkrimp oder offener Griff, Schultern aktiv (Hörst).",
+      "warnings": ["Nur ausgeruht.", "Fingerschmerz = sofort aufhören."],
+      "alternatives": ["max_hangs_20mm"]
+    },
+    "moon_edge_holds": {
+      "name": "Moonboard-Halteübung kleine Leisten",
+      "category": "fingers",
+      "minLevel": 3, "minYears": 1, "fingerIntense": true,
+      "timer": { "type": "interval", "work": 7, "rest": 0, "reps": 1 },
+      "description": "Ersatz fürs Hangboard: Am Moonboard 40° eine feste Position an zwei kleinen Leisten (Halbkrimp) einnehmen, Füße auf Tritten, möglichst viel Gewicht auf die Finger bringen und 7–10 s statisch halten. Immer dieselben Griffe nutzen (im Notizfeld festhalten), ab „Fortgeschritten“ über den Gewichtsgürtel steigern.",
+      "warnings": ["Nur ausgeruht, nie bei Fingerschmerz."],
+      "alternatives": ["max_hangs_20mm", "max_hangs_bw"]
+    },
+
+    "moon_limit": {
+      "name": "Moonboard 40° Limit-Boulder",
+      "category": "board",
+      "minLevel": 3, "fingerIntense": true,
+      "description": "4–6 Probleme nahe deinem Limit. Jeder Versuch mit voller Konzentration, 3–4 min Pause zwischen den Versuchen. Beenden, sobald die Zugqualität nachlässt. Projekte im Notizfeld notieren.",
+      "warnings": ["Abbrechen, sobald die Züge unsauber werden.", "Kleine Leisten nur gut aufgewärmt."],
+      "alternatives": ["kilter_limit", "gym_limit"]
+    },
+    "kilter_limit": {
+      "name": "Kilterboard Limit-Boulder",
+      "category": "board",
+      "minLevel": 3, "fingerIntense": true,
+      "description": "4–6 Probleme nahe am Limit auf dem Kilter, 3–4 min Pause zwischen den Versuchen.",
+      "warnings": ["Abbrechen, sobald die Züge unsauber werden."],
+      "alternatives": ["moon_limit", "gym_limit"]
+    },
+    "gym_limit": {
+      "name": "Hallen-Limit-Boulder (schwächster Stil)",
+      "category": "gym",
+      "description": "Ersatz für die Board-Limit-Boulder, höchstens 1× pro Woche: 3–4 harte Hallenboulder in deinem schwächsten Stil (z. B. Kompression, Slab, Koordination, Untergriffe). 3–4 min Pause zwischen den Versuchen, abbrechen, wenn die Zugqualität nachlässt.",
+      "warnings": ["Abbrechen, sobald die Züge unsauber werden."],
+      "alternatives": ["moon_limit", "kilter_limit", "projecting"]
+    },
+    "gym_4x4": {
+      "name": "Hallen-4×4",
+      "category": "gym",
+      "minLevel": 2,
+      "description": "4 Hallenboulder direkt hintereinander ohne Pause klettern (= 1 Runde), danach Pause. Bewusst gemischte Stile wählen: Slab, senkrecht, Überhang, Volumen. Die letzte Runde soll hart, aber sauber machbar sein.",
+      "alternatives": ["kilter_4x4", "moon_4x4"]
+    },
+    "gym_circuits": {
+      "name": "Hallen-Circuits (Linked Boulders)",
+      "category": "gym",
+      "minLevel": 3,
+      "description": "2–3 Hallenboulder ohne Absteigen verbinden oder einen Circuit über mehrere Wandbereiche klettern. Ziel: Kraft unter Ermüdung halten, Füße trotzdem präzise setzen.",
+      "alternatives": ["linked_boulders", "board_circuit_30_30"]
+    },
+    "gym_technique": {
+      "name": "Technik & Volumen in der Halle",
+      "category": "gym",
+      "description": "Boulder 2–3 Grade unter Limit in Stilen, die auf dem Board fehlen: Slab, senkrechte Wände, Kompression und Volumen, Untergriffe, Koordinationszüge. Vor jedem Versuch lesen, Füße präzise und leise setzen.",
+      "alternatives": ["kilter_technique", "volume_bouldering"]
+    },
+    "gym_coordination": {
+      "name": "Koordinations- & Dyno-Boulder (Halle)",
+      "category": "gym",
+      "minLevel": 2,
+      "description": "Dynamische Hallenboulder: Deadpoints, Paddle-Dynos, Run-and-Jumps, Doppeldynos. Wenige Versuche mit voller Intention und vollen Pausen. Kontrolliert landen, Matten prüfen.",
+      "warnings": ["Kontrolliert landen, Matten prüfen."],
+      "alternatives": ["moon_campus_feet"]
+    },
+    "gym_free": {
+      "name": "Freies Bouldern (Halle, optional)",
+      "category": "gym",
+      "description": "Optionaler Block nach der Kraft-Session – zählt nicht für „erledigt“. Regeln: mindestens 2 Grade unter Limit, kein Projektieren, keine kleinen Leisten bis zum Anschlag, sofort aufhören bei Fingerschmerzen. Fällt in Deload- und Testwochen weg und wird in der leichten Variante (schlechter Check-in) sowie bei „Wenig Zeit“ ausgeblendet.",
+      "alternatives": ["gym_technique"]
+    },
+    "moon_submax": {
+      "name": "Moonboard submaximal",
+      "category": "board",
+      "minLevel": 3,
+      "description": "Deload: 6–8 Probleme deutlich unter Limit, 1–2 Versuche, Fokus auf saubere, ruhige Bewegung. Keine Limit-Versuche!",
+      "alternatives": ["kilter_submax"]
+    },
+    "kilter_submax": {
+      "name": "Kilter submaximal",
+      "category": "board",
+      "description": "Deload: 6–8 Boulder deutlich unter Limit, 1–2 Versuche, Fokus auf Präzision.",
+      "alternatives": ["moon_submax", "volume_bouldering"]
+    },
+
+    "assisted_pullups": {
+      "name": "Klimmzüge (Band oder Körpergewicht)",
+      "category": "strength",
+      "minLevel": 1,
+      "description": "Schulterbreiter Obergriff, aus dem gestreckten Hang mit aktiven Schultern bis das Kinn über der Stange ist, 2–3 s kontrolliert ablassen. Wenn nötig mit Widerstandsband unter den Füßen; das Band wird über die Wochen dünner.",
+      "alternatives": ["ring_pullups"]
+    },
+    "weighted_pullups": {
+      "name": "Gewichtete Klimmzüge",
+      "category": "strength",
+      "minLevel": 3,
+      "description": "Schulterbreiter Obergriff, volle Bewegungsamplitude, 2–3 s kontrolliert ablassen. Zusatzgewicht per Gürtel.",
+      "warnings": ["Bei Schmerz an der Ellbogen-Innenseite Gewicht reduzieren."],
+      "alternatives": ["ring_pullups"]
+    },
+    "ring_pullups": {
+      "name": "Klimmzüge an Ringen",
+      "category": "strength",
+      "description": "Klimmzüge an Ringen (schultergelenkschonend durch freie Rotation), optional mit Gewichtsgürtel.",
+      "alternatives": ["weighted_pullups", "assisted_pullups"]
+    },
+    "one_arm_negatives": {
+      "name": "Einarmige Lock-off-Negatives",
+      "category": "strength",
+      "minLevel": 4, "minYears": 2,
+      "description": "Mit beiden Armen hochziehen, eine Hand lösen, oben 2 s halten, dann über ca. 5 s kontrolliert ablassen – bei 90° und 120° jeweils kurz stoppen. Bei Bedarf mit Band oder zwei Fingern der freien Hand unterstützen.",
+      "warnings": ["Hohe Last für Ellbogen und Schulter – nur ohne Beschwerden."],
+      "alternatives": ["lockoff_holds"]
+    },
+    "lockoff_holds": {
+      "name": "Lock-off-Halten",
+      "category": "strength",
+      "minLevel": 3,
+      "description": "Zweiarmig (ab „Fortgeschritten“ auch einarmig assistiert): je 3–5 s oben, bei 90° und bei 120° halten.",
+      "alternatives": ["one_arm_negatives"]
+    },
+    "pushups": {
+      "name": "Liegestütze",
+      "category": "antagonist",
+      "minLevel": 1,
+      "description": "Körper gerade, Ellbogen ca. 45° vom Körper, Brust bis knapp über den Boden. Leichter: Hände erhöht auf der Hantelbank.",
+      "alternatives": ["ring_pushups"]
+    },
+    "dips_bw": {
+      "name": "Dips (Körpergewicht)",
+      "category": "antagonist",
+      "minLevel": 2,
+      "description": "Am Dip-Barren, Schultern tief und stabil, nur bis ca. 90° im Ellbogen. Leichter: Bank-Dips mit Füßen am Boden.",
+      "warnings": ["Bei Schmerz vorne in der Schulter weniger tief gehen."],
+      "alternatives": ["pushups", "weighted_dips"]
+    },
+    "weighted_dips": {
+      "name": "Gewichtete Dips",
+      "category": "antagonist",
+      "minLevel": 3,
+      "description": "Am Dip-Barren, Schultern tief und stabil, bis ca. 90° im Ellbogen. Zusatzgewicht per Gürtel.",
+      "warnings": ["Bei Schmerz vorne in der Schulter weniger tief gehen."],
+      "alternatives": ["ring_dips", "dips_bw"]
+    },
+    "ring_dips": {
+      "name": "Ring-Dips",
+      "category": "antagonist",
+      "minLevel": 3,
+      "description": "Dips an Ringen, oben Ringe nach außen drehen. Anspruchsvoller als am Barren – Gewicht entsprechend reduzieren.",
+      "alternatives": ["weighted_dips"]
+    },
+    "bench_press": {
+      "name": "Bankdrücken",
+      "category": "antagonist",
+      "minLevel": 2,
+      "description": "Schulterblätter zusammen und nach unten, Füße fest am Boden, Stange kontrolliert zur unteren Brust.",
+      "alternatives": ["weighted_pushups", "pushups"]
+    },
+    "weighted_pushups": {
+      "name": "Liegestütze mit Gewicht",
+      "category": "antagonist",
+      "minLevel": 3,
+      "description": "Hantelscheibe auf dem oberen Rücken, Körperspannung halten, volle Amplitude.",
+      "alternatives": ["bench_press", "ring_pushups"]
+    },
+    "ring_pushups": {
+      "name": "Ring-Push-ups",
+      "category": "antagonist",
+      "minLevel": 2,
+      "description": "Liegestütze an tief hängenden Ringen, oben Ringe nach außen drehen. Schwerer: Füße erhöht auf der Hantelbank.",
+      "alternatives": ["weighted_pushups", "pushups"]
+    },
+    "ring_ytw": {
+      "name": "Ring Y-T-W",
+      "category": "antagonist",
+      "description": "An den Ringen schräg nach hinten lehnen und mit gestreckten Armen in Y-, T- und W-Position ziehen. Langsam, Schulterblätter aktiv.",
+      "alternatives": ["prone_ytw"]
+    },
+    "prone_ytw": {
+      "name": "Y-T-W auf der Hantelbank",
+      "category": "antagonist",
+      "description": "Bauchlage auf der schrägen Hantelbank, mit leichten Hantelscheiben Y-, T- und W-Positionen.",
+      "alternatives": ["ring_ytw"]
+    },
+    "front_lever": {
+      "name": "Front-Lever-Progression",
+      "category": "core",
+      "minLevel": 2,
+      "description": "Progression: Tuck → Advanced Tuck → One-Leg → Straddle → Full. Schwierigste Stufe wählen, die du sauber halten kannst. Schulterblätter nach unten ziehen, Arme gestreckt.",
+      "alternatives": ["front_lever_raises", "hanging_leg_raises"]
+    },
+    "front_lever_raises": {
+      "name": "Front-Lever-Raises",
+      "category": "core",
+      "minLevel": 3,
+      "description": "Aus dem Hang kontrolliert in die Front-Lever-Position heben und wieder absenken (Progressionsstufe wie beim Halten).",
+      "alternatives": ["front_lever"]
+    },
+    "hanging_leg_raises": {
+      "name": "Hanging Leg Raises",
+      "category": "core",
+      "description": "Gestreckte Beine bis zur Stange (Toes-to-Bar), ohne Schwung. Leichter: Knie angewinkelt zur Brust.",
+      "alternatives": ["l_sit"]
+    },
+    "l_sit": {
+      "name": "L-Sit am Barren",
+      "category": "core",
+      "minLevel": 2,
+      "description": "Am Dip-Barren stützen, Beine gestreckt waagerecht halten.",
+      "alternatives": ["hanging_leg_raises"]
+    },
+    "wrist_extensors": {
+      "name": "Unterarm-Extensoren",
+      "category": "antagonist",
+      "description": "Reverse Wrist Curls mit Hantelscheibe oder Band, langsam. Beugt Ellbogenproblemen vor.",
+      "alternatives": ["mobility_forearms"]
+    },
+
+    "kilter_power": {
+      "name": "Kilter Power-Boulder",
+      "category": "board",
+      "minLevel": 3, "fingerIntense": true,
+      "description": "Kurze, explosive Boulder mit 4–6 Zügen. Begrenzte Versuche pro Problem, volle Pausen (ca. 3 min). Jeder Zug mit maximaler Intention.",
+      "alternatives": ["moon_power"]
+    },
+    "moon_power": {
+      "name": "Moonboard Power-Boulder",
+      "category": "board",
+      "minLevel": 3, "fingerIntense": true,
+      "description": "Kurze, explosive Moonboard-Probleme mit 4–6 Zügen, maximal 6–8 Versuche pro Problem.",
+      "alternatives": ["kilter_power"]
+    },
+    "moon_campus_feet": {
+      "name": "Moonboard-Campus mit Füßen",
+      "category": "board",
+      "minLevel": 4, "minYears": 2, "fingerIntense": true, "noYouth": true,
+      "description": "Explosive weite Züge an großen bis mittleren Griffen, die Füße bleiben auf Tritten. 3–4 Züge pro Durchgang, maximale Geschwindigkeit, volle Pause. Niedriges Volumen!",
+      "warnings": ["Nie mit Fingerschmerz.", "Nicht für Jugendliche im Wachstum."],
+      "alternatives": ["kilter_power"]
+    },
+    "kilter_4x4": {
+      "name": "Kilter 4×4",
+      "category": "board",
+      "minLevel": 2,
+      "description": "4 Boulder direkt hintereinander ohne Pause klettern (= 1 Runde), danach Pause. Boulder so wählen, dass die letzte Runde hart, aber sauber machbar ist.",
+      "alternatives": ["moon_4x4", "gym_4x4"]
+    },
+    "moon_4x4": {
+      "name": "Moonboard 4×4",
+      "category": "board",
+      "minLevel": 3,
+      "description": "4 Moonboard-Probleme direkt hintereinander (= 1 Runde), danach Pause.",
+      "alternatives": ["kilter_4x4"]
+    },
+    "linked_boulders": {
+      "name": "Linked Boulders",
+      "category": "board",
+      "minLevel": 3,
+      "description": "2–3 Boulder ohne Absteigen verbinden (Abklettern oder Übergang über Zwischengriffe). Ziel: Kraft unter Ermüdung halten.",
+      "alternatives": ["board_circuit_30_30", "gym_circuits"]
+    },
+    "board_circuit_30_30": {
+      "name": "Board-Circuit 30/30",
+      "category": "board",
+      "minLevel": 2,
+      "timer": { "type": "interval", "work": 30, "rest": 30, "reps": 6 },
+      "description": "Am Kilter 30 s durchgehend klettern, 30 s Pause, 6 Durchgänge = 1 Serie. Moderate Griffe, flüssig klettern.",
+      "alternatives": ["linked_boulders"]
+    },
+    "kilter_technique": {
+      "name": "Kilter Technik & Volumen",
+      "category": "technique",
+      "description": "Boulder 2–3 Grade unter Limit. Fokus: präzise Fußarbeit, Heel- und Toe-Hooks, Hüftposition, Lesen vor dem Versuch, flüssige Ausführung.",
+      "alternatives": ["moon_submax", "gym_technique", "volume_bouldering"]
+    },
+    "technique_drills": {
+      "name": "Technik-Drills",
+      "category": "technique",
+      "description": "Silent Feet, Hover Hands (Hand 1 s über dem Griff halten), einbeinig klettern, Flaggen bewusst variieren.",
+      "alternatives": []
+    },
+    "cooldown": {
+      "name": "Cool-down",
+      "category": "mobility",
+      "description": "Lockeres Klettern oder Ausschütteln, Unterarme und Schultern dehnen.",
+      "alternatives": ["mobility_forearms"]
+    },
+    "mobility_hips": {
+      "name": "Hüft-Mobility",
+      "category": "mobility",
+      "description": "90/90-Wechsel, Frog-Stretch, tiefe Hocke halten, Pancake – ruhig atmen, je 60–90 s.",
+      "alternatives": []
+    },
+    "mobility_shoulders": {
+      "name": "Schulter-Mobility",
+      "category": "mobility",
+      "description": "Wall Slides, Band-Dislocates, Brustwirbelsäulen-Rotation, Hang an der Stange (passiv, 30 s).",
+      "alternatives": []
+    },
+    "mobility_forearms": {
+      "name": "Unterarm-Pflege",
+      "category": "mobility",
+      "description": "Beuger und Strecker dehnen, Extensoren mit Gummiband, Faszienrolle bzw. Massageball für die Unterarme.",
+      "alternatives": []
+    },
+
+    "bench_max_hang": {
+      "name": "Benchmark: Max Hang 20 mm (10 s)",
+      "category": "benchmark",
+      "minLevel": 3, "minYears": 1, "fingerIntense": true,
+      "timer": { "type": "interval", "work": 10, "rest": 0, "reps": 1 },
+      "description": "Nach dem Warm-up in 3–4 Versuchen die Last steigern, die du 10 s an der 20-mm-Leiste (Halbkrimp) halten kannst. Zusatzgewicht positiv, Entlastung negativ eintragen. 3 min Pause.",
+      "warnings": ["Nur ausgeruht."],
+      "alternatives": []
+    },
+    "bench_moon_hold": {
+      "name": "Benchmark: Moonboard-Halteübung (7 s)",
+      "category": "benchmark",
+      "minLevel": 3, "minYears": 1, "fingerIntense": true,
+      "timer": { "type": "interval", "work": 7, "rest": 0, "reps": 1 },
+      "description": "Ersatz ohne Hangboard: Maximales Zusatzgewicht für 7 s an einer festen Moonboard-Position (immer dieselben zwei kleinen Leisten – im Notizfeld festhalten!). Ergebnis eintragen.",
+      "alternatives": []
+    },
+    "bench_pullup_3rm": {
+      "name": "Benchmark: 3RM gewichtete Klimmzüge",
+      "category": "benchmark",
+      "minLevel": 3,
+      "description": "Gewicht in 3–4 Sätzen steigern, bis du genau 3 saubere Wiederholungen schaffst. 3 min Pause. Ergebnis eintragen!",
+      "alternatives": []
+    },
+    "bench_pullup_max": {
+      "name": "Benchmark: Klimmzüge (max. Wiederholungen)",
+      "category": "benchmark",
+      "minLevel": 1,
+      "description": "Nach dem Warm-up so viele saubere Klimmzüge mit Körpergewicht wie möglich (Kinn über die Stange, unten Arme gestreckt). Mit Band: Banddicke notieren. Ergebnis eintragen!",
+      "alternatives": []
+    },
+    "bench_moon_grade": {
+      "name": "Benchmark: Höchster Moonboard-Grad",
+      "category": "benchmark",
+      "minLevel": 3,
+      "description": "Moonboard 40°: In ca. 60 min eine Pyramide bis zum Limit klettern (Benchmark-Probleme). Eintragen: höchster gekletterter Grad. In Woche 12 identisch wiederholen.",
+      "alternatives": []
+    },
+    "bench_kilter_grade": {
+      "name": "Benchmark: Grad-Pyramide (Kilter oder Halle)",
+      "category": "benchmark",
+      "description": "In ca. 45–60 min eine Pyramide bis zum Limit klettern: mehrere Boulder je Grad, dann steigern. Am Kilter immer im selben Winkel. Eintragen: höchster gekletterter Grad. In Woche 12 identisch wiederholen.",
+      "alternatives": []
+    }
+  },
+
+  "sessions": {
+    "A": [
+      { "exercise": "warmup_routine", "core": true, "sets": 1, "reps": "20 min", "intensity": "locker → RPE 6", "minutes": 20,
+        "quick": { "reps": "10 min", "minutes": 10 },
+        "parametersByLevel": {
+          "1": { "reps": "10–15 min", "intensity": "locker", "minutes": 15 },
+          "3": { "reps": "15 min", "intensity": "locker → RPE 6 · zum Schluss 2–3 Hangs mit Füßen", "minutes": 15 },
+          "4": { "reps": "20 min", "intensity": "locker → RPE 6", "minutes": 20 } } },
+
+      { "exercise": "assisted_hangs", "core": true, "minLevel": 2, "exceptWeeks": [1, 12],
+        "parametersByLevel": {
+          "2": { "exercise": "assisted_hangs", "sets": 5, "reps": "10 s", "rest": 120, "intensity": "20–25 mm · Füße entlasten · RPE 5–6", "minutes": 12,
+                 "quick": { "sets": 4, "minutes": 9 },
+                 "phases": { "base": { "skip": true }, "deload": { "sets": 3, "intensity": "20–25 mm · viel Entlastung · RPE 4–5", "minutes": 7 } },
+                 "noHangboard": { "skip": true } },
+          "3": { "exercise": "repeaters_7_3", "sets": 2, "reps": "6 × 7 s / 3 s", "rest": 180, "intensity": "Körpergewicht · Leiste ≥ 20 mm · RPE 7", "minutes": 10,
+                 "quick": { "sets": 1, "minutes": 5 },
+                 "phases": {
+                   "deload": { "sets": 1, "intensity": "große Leiste · RPE 5–6", "minutes": 5 },
+                   "max":   { "exercise": "max_hangs_bw", "sets": 5, "reps": "10 s", "intensity": "kleinste Leiste mit 3 s Reserve · RPE 7–8", "minutes": 17 },
+                   "power": { "exercise": "max_hangs_bw", "sets": 4, "reps": "10 s", "intensity": "RPE 7 · Kraft halten", "minutes": 14 } },
+                 "noHangboard": { "exercise": "moon_edge_holds", "reps": "7–10 s halten", "intensity": "Körpergewicht · Füße auf Tritten" } },
+          "4": { "sets": 3, "intensity": "20 mm · Körpergewicht · RPE 7–8", "minutes": 14,
+                 "quick": { "sets": 2, "minutes": 10 },
+                 "phases": {
+                   "deload": { "exercise": "max_hangs_20mm", "sets": 3, "reps": "10 s", "intensity": "Körpergewicht bis wenig Zusatzgewicht · RPE 5–6", "minutes": 12 },
+                   "max":   { "exercise": "max_hangs_20mm", "sets": 6, "reps": "10 s", "intensity": "Zusatzgewicht · RPE 9 (1 s Reserve)", "minutes": 25 },
+                   "power": { "exercise": "max_hangs_20mm", "sets": 4, "reps": "10 s", "intensity": "Zusatzgewicht · RPE 8 (Kraft halten)", "minutes": 16 } },
+                 "noHangboard": { "exercise": "moon_edge_holds", "reps": "7–10 s halten", "intensity": "mit Gewichtsgürtel · RPE wie geplant", "noYouth": true } },
+          "5": { "sets": 4, "intensity": "20 mm · leichtes Zusatzgewicht · RPE 8", "minutes": 18,
+                 "phases": {
+                   "max":   { "sets": 6, "intensity": "Zusatzgewicht · RPE 9–9,5" },
+                   "power": { "exercise": "hangs_7_53", "sets": 3, "reps": "3 × 7 s / 53 s", "rest": 240, "intensity": "Last für max. 10 s · RPE 9", "minutes": 18 } } } } },
+
+      { "exercise": "bench_max_hang", "core": true, "benchmark": "maxHang", "onlyWeeks": [1, 12], "minLevel": 3,
+        "sets": 4, "reps": "10 s", "rest": 180, "intensity": "steigern bis Maximum", "minutes": 20,
+        "noHangboard": { "exercise": "bench_moon_hold", "reps": "7 s halten" },
+        "parametersByLevel": { "3": { "intensity": "Körpergewicht, mit Entlastung oder Zusatzgewicht · bis Maximum" }, "4": { "intensity": "steigern bis Maximum" } } },
+
+      { "exercise": "projecting", "core": true, "limit": true,
+        "parametersByLevel": {
+          "1": { "exercise": "projecting", "onlyPhases": ["base", "max", "power"], "sets": 2, "reps": "Boulder · max. 4 Versuche", "rest": 180,
+                 "intensity": "{G+1} · Halle oder Kilter 20–25° · ≤ 30 min", "minutes": 30, "quick": { "sets": 1, "minutes": 15 },
+                 "phases": { "max": { "sets": 3, "minutes": 35 }, "power": { "sets": 3, "intensity": "{G}–{G+1} · dynamische Züge", "minutes": 35 } } },
+          "2": { "intensity": "{G+1} · Halle oder Kilter 25–30°", "phases": { "base": { "sets": 3, "minutes": 35 } } },
+          "3": { "exercise": "moon_limit", "onlyPhases": ["base", "max", "power"], "exceptWeeks": [1], "sets": 4, "reps": "Probleme · 3–4 Versuche", "rest": 210,
+                 "intensity": "{G}–{G+1} · Technik-Fokus", "minutes": 40, "quick": { "sets": 2, "minutes": 20 },
+                 "phases": { "max": { "sets": 5, "intensity": "{G}–{G+1} · volle Pausen", "minutes": 50 }, "power": { "sets": 4, "intensity": "{G}–{G+1} · maximal explosiv", "minutes": 40 } } },
+          "4": { "intensity": "{G-1}–{G} · Technik-Fokus", "minutes": 45,
+                 "phases": { "max": { "sets": 6, "intensity": "{G}–{G+2}", "minutes": 60 }, "power": { "sets": 5, "intensity": "{G}–{G+1} · maximal explosiv", "minutes": 50 } } } } },
+
+      { "exercise": "kilter_submax", "core": true, "onlyPhases": ["deload"],
+        "sets": 6, "reps": "Boulder · 1–2 Versuche", "rest": 120, "quick": { "sets": 4, "minutes": 15 },
+        "parametersByLevel": {
+          "1": { "exercise": "kilter_submax", "intensity": "{G-2}–{G-1} · keine Limit-Versuche · Halle oder Kilter 20–25°", "minutes": 25 },
+          "3": { "exercise": "kilter_submax", "intensity": "{G-3}–{G-2} · Kilter 30° · keine Limit-Versuche", "minutes": 30 },
+          "4": { "exercise": "moon_submax", "intensity": "{G-4}–{G-2} · keine Limit-Versuche", "minutes": 30 } } },
+
+      { "exercise": "bench_moon_grade", "core": true, "limit": true, "benchmark": "moonGrade", "onlyWeeks": [1, 12], "minLevel": 3,
+        "sets": 1, "reps": "60 min Pyramide", "rest": 210, "intensity": "bis zum Limit", "minutes": 60 },
+
+      { "exercise": "technique_drills", "exceptWeeks": [1, 12],
+        "parametersByLevel": {
+          "1": { "exercise": "technique_drills", "sets": 1, "reps": "15 min", "rest": 0, "intensity": "Silent Feet, Hover Hands, Flaggen", "minutes": 15 },
+          "3": { "exercise": "weighted_pullups", "sets": 3, "reps": "6–8", "rest": 120, "intensity": "+0–5 kg · RPE 7", "minutes": 10,
+                 "phases": {
+                   "deload": { "sets": 2, "reps": "6", "intensity": "Körpergewicht · RPE 6", "minutes": 6 },
+                   "max":    { "sets": 4, "reps": "5", "rest": 180, "intensity": "schwer · RPE 8", "minutes": 14 },
+                   "power":  { "sets": 3, "reps": "3", "rest": 150, "intensity": "leicht · explosiv", "minutes": 9 } } },
+          "4": { "reps": "8–10", "intensity": "leichtes Zusatzgewicht · RPE 7–8", "minutes": 12,
+                 "phases": {
+                   "max":   { "sets": 5, "reps": "3", "intensity": "schwer · RPE 8–9", "minutes": 18 },
+                   "power": { "sets": 4, "reps": "3", "intensity": "mittel · explosiv", "minutes": 12 } } } } },
+
+      { "exercise": "bench_pullup_max", "core": true, "benchmark": "pullupMax", "onlyWeeks": [1, 12], "maxLevel": 2,
+        "sets": 1, "reps": "max. Wdh.", "rest": 0, "intensity": "Körpergewicht · saubere Technik", "minutes": 8 },
+
+      { "exercise": "bench_pullup_3rm", "core": true, "benchmark": "pullup3RM", "onlyWeeks": [1, 12], "minLevel": 3,
+        "sets": 4, "reps": "3", "rest": 180, "intensity": "steigern bis 3RM", "minutes": 15 },
+
+      { "exercise": "cooldown", "sets": 1, "reps": "5–10 min", "intensity": "locker", "minutes": 8 }
+    ],
+
+    "B": [
+      { "exercise": "warmup_short", "core": true, "sets": 1, "reps": "10 min", "intensity": "locker", "minutes": 10,
+        "quick": { "reps": "5 min", "minutes": 5 } },
+
+      { "exercise": "assisted_pullups", "core": true, "quick": { "sets": 2, "minutes": 7 },
+        "parametersByLevel": {
+          "1": { "exercise": "assisted_pullups", "sets": 3, "reps": "5–8", "rest": 120, "intensity": "Band nach Bedarf · saubere Technik", "minutes": 10,
+                 "phases": { "deload": { "sets": 2, "reps": "5", "minutes": 6 }, "test": { "sets": 2, "reps": "5", "minutes": 6 } } },
+          "2": { "reps": "6–10", "intensity": "Körpergewicht, wenn nötig Band · RPE 7" },
+          "3": { "exercise": "weighted_pullups", "sets": 3, "reps": "6–8", "rest": 120, "intensity": "+0–5 kg · RPE 7", "minutes": 10,
+                 "phases": {
+                   "deload": { "sets": 2, "reps": "6", "intensity": "Körpergewicht · RPE 6", "minutes": 6 },
+                   "max":    { "sets": 4, "reps": "5", "rest": 180, "intensity": "schwer · RPE 8", "minutes": 15 },
+                   "power":  { "sets": 3, "reps": "3", "rest": 150, "intensity": "leicht · maximal schnell", "minutes": 10 },
+                   "test":   { "sets": 2, "reps": "3", "intensity": "mittel · RPE 6 (Taper)", "minutes": 6 } } },
+          "4": { "reps": "8–10", "intensity": "leichtes Zusatzgewicht · RPE 7–8", "minutes": 12,
+                 "phases": { "power": { "sets": 4, "minutes": 12 } } } } },
+
+      { "exercise": "lockoff_holds", "minLevel": 3,
+        "parametersByLevel": {
+          "3": { "exercise": "lockoff_holds", "sets": 3, "reps": "3 Positionen × 3–5 s", "rest": 120, "intensity": "zweiarmig", "minutes": 10,
+                 "phases": { "deload": { "sets": 2, "minutes": 7 }, "test": { "sets": 2, "minutes": 6 } } },
+          "4": { "exercise": "one_arm_negatives", "sets": 3, "reps": "3 je Arm", "rest": 120, "intensity": "5 s ablassen · ggf. Band", "minutes": 12,
+                 "phases": {
+                   "deload": { "sets": 2, "reps": "2 je Arm", "minutes": 8 },
+                   "max":    { "sets": 4, "reps": "3 je Arm", "intensity": "3 Positionen halten · +0–5 kg", "minutes": 15 },
+                   "power":  { "sets": 3, "reps": "2 je Arm", "intensity": "3 s Lock-off + explosiver Re-Pull", "minutes": 10 },
+                   "test":   { "sets": 2, "reps": "2 je Arm", "intensity": "locker", "minutes": 6 } } } } },
+
+      { "exercise": "pushups", "core": true, "quick": { "sets": 2, "minutes": 6 },
+        "parametersByLevel": {
+          "1": { "exercise": "pushups", "sets": 3, "reps": "8–12", "rest": 90, "intensity": "ggf. Hände erhöht · RPE 7", "minutes": 7,
+                 "phases": { "deload": { "sets": 2, "minutes": 5 }, "test": { "sets": 2, "minutes": 5 } } },
+          "2": { "exercise": "dips_bw", "sets": 3, "reps": "6–10", "rest": 120, "intensity": "Körpergewicht · bis 90°", "minutes": 8,
+                 "phases": { "deload": { "sets": 2, "reps": "6", "minutes": 5 }, "test": { "sets": 2, "reps": "6", "minutes": 5 } } },
+          "3": { "exercise": "weighted_dips", "sets": 3, "reps": "8", "rest": 120, "intensity": "+0–10 kg · RPE 7", "minutes": 9,
+                 "phases": {
+                   "deload": { "sets": 2, "reps": "8", "intensity": "Körpergewicht", "minutes": 6 },
+                   "max":    { "sets": 4, "reps": "5", "rest": 150, "intensity": "schwer · RPE 8", "minutes": 12 },
+                   "power":  { "sets": 3, "reps": "5", "intensity": "mittel · explosiv", "minutes": 9 },
+                   "test":   { "sets": 2, "reps": "6", "intensity": "Körpergewicht", "minutes": 5 } } },
+          "4": { "reps": "8–10", "intensity": "Zusatzgewicht · RPE 7", "minutes": 10 } } },
+
+      { "exercise": "bench_press", "minLevel": 2,
+        "parametersByLevel": {
+          "2": { "exercise": "bench_press", "sets": 3, "reps": "10", "rest": 120, "intensity": "RPE 7", "minutes": 10,
+                 "phases": { "deload": { "sets": 2, "reps": "8", "intensity": "ca. 60 % · locker", "minutes": 6 }, "test": { "sets": 2, "reps": "6", "intensity": "leicht", "minutes": 5 } } },
+          "4": { "reps": "8–10",
+                 "phases": { "max": { "sets": 4, "reps": "5", "rest": 150, "intensity": "RPE 8", "minutes": 12 }, "power": { "sets": 3, "reps": "5", "intensity": "explosiv · RPE 7", "minutes": 9 } } } } },
+
+      { "exercise": "ring_pushups", "minLevel": 2,
+        "sets": 3, "reps": "10–12", "rest": 90, "intensity": "RPE 7", "minutes": 7,
+        "phases": { "deload": { "sets": 2, "reps": "8", "minutes": 4 }, "test": { "sets": 2, "reps": "8", "minutes": 4 } },
+        "parametersByLevel": { "4": { "phases": { "max": { "reps": "8", "intensity": "Füße erhöht · RPE 8" }, "power": { "reps": "6", "intensity": "explosiv" } } } } },
+
+      { "exercise": "ring_ytw",
+        "sets": 3, "reps": "8 je Position", "rest": 60, "intensity": "langsam · RPE 6", "minutes": 7,
+        "phases": { "deload": { "sets": 2, "minutes": 5 }, "test": { "sets": 2, "minutes": 5 } },
+        "parametersByLevel": { "1": { "sets": 2, "minutes": 5 }, "2": { "sets": 3, "minutes": 7 } } },
+
+      { "exercise": "front_lever", "core": true, "quick": { "sets": 3, "minutes": 6 },
+        "parametersByLevel": {
+          "1": { "exercise": "hanging_leg_raises", "sets": 3, "reps": "8", "rest": 60, "intensity": "Knie angewinkelt · ohne Schwung", "minutes": 5,
+                 "phases": { "deload": { "sets": 2, "minutes": 4 }, "test": { "sets": 2, "minutes": 4 } } },
+          "2": { "exercise": "front_lever", "sets": 4, "reps": "5 s halten", "rest": 90, "intensity": "Tuck", "minutes": 7,
+                 "phases": { "deload": { "sets": 3, "minutes": 5 }, "test": { "sets": 3, "minutes": 5 } } },
+          "3": { "reps": "5–8 s halten", "intensity": "Tuck / Advanced Tuck", "minutes": 8,
+                 "phases": { "deload": { "reps": "5 s halten", "intensity": "leichtere Stufe" }, "max": { "sets": 5, "reps": "8–10 s halten", "intensity": "schwierigste saubere Stufe", "minutes": 10 } } },
+          "4": { "phases": { "power": { "exercise": "front_lever_raises", "sets": 4, "reps": "3–5 Wdh.", "intensity": "kontrolliert-dynamisch", "minutes": 8 } } } } },
+
+      { "exercise": "hanging_leg_raises", "minLevel": 2,
+        "sets": 3, "reps": "8–12", "rest": 60, "intensity": "ohne Schwung", "minutes": 6,
+        "phases": { "deload": { "sets": 2, "minutes": 4 }, "test": { "sets": 2, "minutes": 4 } } },
+
+      { "exercise": "wrist_extensors", "sets": 2, "reps": "15–20", "rest": 45, "intensity": "leicht", "minutes": 4 },
+
+      { "exercise": "gym_free", "onlyIf": "gym", "exceptPhases": ["deload", "test"], "limit": true,
+        "sets": 1, "reps": "30–45 min", "intensity": "≥ 2 Grade unter Limit · kein Projektieren", "minutes": 40 }
+    ],
+
+    "C": [
+      { "exercise": "warmup_routine", "core": true, "sets": 1, "reps": "20 min", "intensity": "locker → RPE 6", "minutes": 20,
+        "quick": { "reps": "10 min", "minutes": 10 },
+        "parametersByLevel": {
+          "1": { "reps": "10–15 min", "intensity": "locker", "minutes": 15 },
+          "3": { "reps": "15 min", "intensity": "locker → RPE 6", "minutes": 15 },
+          "4": { "reps": "20 min", "minutes": 20 } } },
+
+      { "exercise": "bench_kilter_grade", "core": true, "limit": true, "benchmark": "kilterGrade", "onlyWeeks": [1, 12],
+        "sets": 1, "reps": "60 min Pyramide", "rest": 210, "intensity": "Kilter 40° · bis zum Limit", "minutes": 60,
+        "parametersByLevel": {
+          "1": { "reps": "45 min Pyramide", "rest": 150, "intensity": "Halle oder Kilter 20–25° · bis zum Limit", "minutes": 45 },
+          "3": { "reps": "60 min Pyramide", "rest": 180, "intensity": "Kilter 35° · bis zum Limit", "minutes": 60 },
+          "4": { "rest": 210, "intensity": "Kilter 40° · bis zum Limit" } } },
+
+      { "exercise": "volume_bouldering", "core": true, "exceptWeeks": [1, 12],
+        "parametersByLevel": {
+          "1": { "exercise": "volume_bouldering", "sets": 15, "reps": "Boulder", "rest": 75, "intensity": "bis {G} · viele Stile · sauber", "minutes": 40,
+                 "quick": { "sets": 10, "minutes": 25 },
+                 "phases": {
+                   "deload": { "sets": 10, "intensity": "{G-1} und leichter", "minutes": 25 },
+                   "max":    { "sets": 12, "intensity": "{G-1}–{G} · neue Bewegungen", "minutes": 35 },
+                   "power":  { "sets": 12, "intensity": "{G-1}–{G} · zügig, präzise Füße", "minutes": 35 } } },
+          "2": { "intensity": "{G-1}–{G} · viele Stile · sauber" },
+          "3": { "exercise": "kilter_power", "sets": 4, "reps": "Probleme · 4–6 Züge · max. 5 Versuche", "rest": 180, "intensity": "30–35° · {G-1}–{G}", "minutes": 35,
+                 "quick": { "sets": 3, "minutes": 25 },
+                 "phases": {
+                   "deload": { "sets": 3, "reps": "Probleme · 2–3 Versuche", "intensity": "30° · {G-3}–{G-2} · keine Limit-Versuche", "minutes": 20 },
+                   "max":    { "sets": 5, "intensity": "35–40° · {G}–{G+1}", "minutes": 40 },
+                   "power":  { "sets": 5, "intensity": "35–40° · {G}–{G+1} · maximal explosiv", "minutes": 40 } } },
+          "4": { "sets": 5, "reps": "Probleme · 4–6 Züge · max. 6–8 Versuche", "intensity": "40° · {G-2}–{G-1}", "minutes": 40,
+                 "phases": {
+                   "deload": { "intensity": "40° · {G-4}–{G-3} · keine Limit-Versuche" },
+                   "max":    { "sets": 6, "intensity": "45° · {G-1}–{G+1}", "minutes": 45 },
+                   "power":  { "sets": 6, "intensity": "45° · {G}–{G+1} · maximal explosiv", "minutes": 45 } } } } },
+
+      { "exercise": "technique_drills", "maxLevel": 2, "exceptWeeks": [1], "exceptPhases": ["test"],
+        "sets": 1, "reps": "10 min", "rest": 0, "intensity": "Silent Feet, Hover Hands", "minutes": 10 },
+
+      { "exercise": "moon_campus_feet", "core": true, "onlyPhases": ["power"], "minLevel": 4,
+        "sets": 4, "reps": "3–4 Züge", "rest": 180, "intensity": "explosiv · niedriges Volumen", "minutes": 12,
+        "quick": { "sets": 3, "minutes": 9 },
+        "parametersByLevel": { "5": { "sets": 5, "reps": "4 Züge", "minutes": 15 } } },
+
+      { "exercise": "gym_coordination", "onlyIf": "gym", "onlyPhases": ["power"], "minLevel": 2,
+        "sets": 3, "reps": "Boulder · max. 4–5 Versuche", "rest": 180, "intensity": "dynamisch · volle Pausen", "minutes": 15,
+        "parametersByLevel": { "2": { "intensity": "{G-1} · dynamisch · volle Pausen" }, "3": { "intensity": "{G} · dynamisch · volle Pausen" } } },
+
+      { "exercise": "cooldown", "sets": 1, "reps": "5–10 min", "intensity": "locker", "minutes": 8 }
+    ],
+
+    "D": [
+      { "exercise": "warmup_routine", "core": true, "sets": 1, "reps": "20 min", "intensity": "locker → RPE 6", "minutes": 20,
+        "quick": { "reps": "10 min", "minutes": 10 },
+        "parametersByLevel": {
+          "1": { "reps": "10–15 min", "intensity": "locker", "minutes": 15 },
+          "3": { "reps": "15 min", "intensity": "locker → RPE 6", "minutes": 15 },
+          "4": { "reps": "20 min", "minutes": 20 } } },
+
+      { "exercise": "kilter_4x4", "core": true,
+        "parametersByLevel": {
+          "1": { "exercise": "easy_circuits", "onlyPhases": ["base", "deload", "max", "power"], "sets": 3, "reps": "Runden à 5 Boulder", "rest": 180,
+                 "intensity": "{G-2}–{G-1} · zügig, ohne Pause innerhalb der Runde", "minutes": 25, "quick": { "sets": 2, "minutes": 15 },
+                 "phases": { "deload": { "sets": 2, "minutes": 15 }, "power": { "sets": 4, "minutes": 30 } } },
+          "2": { "exercise": "kilter_4x4", "onlyPhases": ["base", "deload", "max"], "sets": 3, "reps": "Runden à 4 Boulder", "rest": 300,
+                 "intensity": "Kilter 25–30° · {G-3}", "minutes": 30, "quick": { "sets": 2, "minutes": 18 },
+                 "phases": { "deload": { "sets": 2, "intensity": "{G-4} · locker", "minutes": 18 } },
+                 "gymPhases": {
+                   "base":   { "exercise": "gym_4x4", "intensity": "Hallenboulder {G-3} · gemischte Stile" },
+                   "deload": { "exercise": "gym_4x4", "intensity": "Hallenboulder {G-4} · locker" } } },
+          "3": { "sets": 4, "rest": 240, "intensity": "Kilter 30–35° · {G-3}–{G-2}", "minutes": 32, "quick": { "sets": 3, "minutes": 24 },
+                 "phases": { "deload": { "sets": 2, "intensity": "{G-4}–{G-3} · locker", "minutes": 18 }, "max": { "sets": 3, "intensity": "{G-3}–{G-2} · Kraftausdauer halten", "minutes": 25 } },
+                 "gymPhases": {
+                   "base":   { "exercise": "gym_4x4", "intensity": "Hallenboulder {G-3}–{G-2} · gemischte Stile" },
+                   "deload": { "exercise": "gym_4x4", "intensity": "Hallenboulder {G-4}–{G-3} · locker" } } },
+          "4": { "intensity": "Kilter 35–40° · {G-4}–{G-2}", "minutes": 35,
+                 "phases": { "deload": { "intensity": "{G-6}–{G-5} · locker" }, "max": { "intensity": "{G-4}–{G-3} · Kraftausdauer halten", "minutes": 27 } },
+                 "gymPhases": {
+                   "base":   { "exercise": "gym_4x4", "intensity": "Hallenboulder {G-4}–{G-2} · gemischte Stile" },
+                   "deload": { "exercise": "gym_4x4", "intensity": "Hallenboulder {G-6}–{G-5} · locker" } } },
+          "5": { "sets": 5, "minutes": 42 } } },
+
+      { "exercise": "linked_boulders", "core": true, "onlyPhases": ["power"], "minLevel": 3,
+        "sets": 3, "reps": "Serien · 2–3 Boulder verbunden", "rest": 300, "intensity": "{G-3}–{G-2}", "minutes": 25,
+        "quick": { "sets": 2, "minutes": 15 },
+        "gym": { "exercise": "gym_circuits", "intensity": "Hallenboulder {G-3}–{G-2}" },
+        "parametersByLevel": { "4": { "sets": 4, "intensity": "{G-3}–{G-1}", "minutes": 30, "gym": { "intensity": "Hallenboulder {G-3}–{G-1}" } } } },
+
+      { "exercise": "board_circuit_30_30", "core": true, "onlyPhases": ["power"], "minLevel": 2,
+        "sets": 2, "reps": "Serien · 6 × 30 s an / 30 s Pause", "rest": 300, "intensity": "Kilter 25–30° · leichte Griffe", "minutes": 20,
+        "quick": { "sets": 1, "minutes": 8 },
+        "parametersByLevel": {
+          "3": { "intensity": "Kilter 30–35° · {G-4}–{G-3}" },
+          "4": { "sets": 3, "intensity": "Kilter 35–40° · {G-5}–{G-3}", "minutes": 25 } } },
+
+      { "exercise": "kilter_technique", "core": true, "onlyPhases": ["test"],
+        "sets": 1, "reps": "30 min locker", "intensity": "{G-3}–{G-2} · Taper", "minutes": 30,
+        "gym": { "exercise": "gym_technique" },
+        "parametersByLevel": { "1": { "intensity": "{G-2}–{G-1} · Halle oder Kilter 20–25° · Taper" }, "3": { "intensity": "{G-3}–{G-2} · Taper" } } },
+
+      { "exercise": "cooldown", "sets": 1, "reps": "5–10 min", "intensity": "locker", "minutes": 8 }
+    ],
+
+    "T": [
+      { "exercise": "warmup_short", "core": true, "sets": 1, "reps": "10 min", "intensity": "locker", "minutes": 10,
+        "quick": { "reps": "5 min", "minutes": 5 } },
+
+      { "exercise": "kilter_technique", "core": true,
+        "sets": 12, "reps": "Boulder", "rest": 90, "intensity": "{G-4}–{G-2} · 2–3 Grade unter Limit", "minutes": 45,
+        "quick": { "sets": 8, "minutes": 30 },
+        "phases": {
+          "deload": { "sets": 8, "intensity": "{G-5}–{G-3} · locker", "minutes": 30 },
+          "max":    { "sets": 10, "minutes": 40 },
+          "power":  { "sets": 10, "intensity": "{G-3}–{G-2} · präzise Füße unter Tempo", "minutes": 40 },
+          "test":   { "sets": 6, "intensity": "locker · Taper", "minutes": 25 }
+        },
+        "gym": { "exercise": "gym_technique" } },
+
+      { "exercise": "technique_drills", "exceptPhases": ["test"], "sets": 1, "reps": "15 min", "intensity": "locker", "minutes": 15 },
+
+      { "exercise": "cooldown", "sets": 1, "reps": "5–10 min", "intensity": "locker", "minutes": 8 }
+    ],
+
+    "E": [
+      { "exercise": "mobility_hips",      "core": true, "sets": 1, "reps": "7 min", "intensity": "entspannt", "minutes": 7 },
+      { "exercise": "mobility_shoulders", "core": true, "sets": 1, "reps": "7 min", "intensity": "entspannt", "minutes": 7 },
+      { "exercise": "mobility_forearms",  "core": true, "sets": 1, "reps": "6 min", "intensity": "entspannt", "minutes": 6 }
+    ]
+  }
+}
