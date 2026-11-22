@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Boulder Plan · Richtung 3 · Fokus</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html, body { margin: 0; background: #0A0A0B; }
+  body { font-family: "Inter", -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  * { scrollbar-width: none; } *::-webkit-scrollbar { display: none; }
+  .focusWide { font-family: "Archivo", sans-serif; font-stretch: 125%; font-weight: 900; letter-spacing: -0.5px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// ---------- iOS-Rahmen (assets/ios_frame.jsx) ----------
+const iosFrameStyles = {
+  wrapper: { display: 'inline-block', padding: 12, background: '#000', borderRadius: 60, boxShadow: '0 0 0 2px #1f2937, 0 20px 60px rgba(0,0,0,0.3)', position: 'relative' },
+  screen: { position: 'relative', borderRadius: 48, overflow: 'hidden', background: '#fff' },
+  statusBar: { position: 'absolute', top: 0, left: 0, right: 0, height: 54, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px 0 32px', fontSize: 16, fontWeight: 600, fontFamily: '-apple-system, "SF Pro Text", sans-serif', zIndex: 20, pointerEvents: 'none' },
+  dynamicIsland: { position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)', width: 124, height: 36, background: '#000', borderRadius: 999, zIndex: 30 },
+  statusIcons: { display: 'flex', alignItems: 'center', gap: 6 },
+  signalIcon: { display: 'flex', alignItems: 'flex-end', gap: 2, height: 12 },
+  signalBar: { width: 3, background: 'currentColor', borderRadius: 1 },
+  batteryIcon: { width: 26, height: 12, border: '1.5px solid currentColor', borderRadius: 3, padding: 1, position: 'relative', opacity: 0.8 },
+  batteryCap: { position: 'absolute', top: 3, right: -3, width: 2, height: 6, background: 'currentColor', borderRadius: '0 1px 1px 0' },
+  content: { position: 'absolute', top: 54, left: 0, right: 0, bottom: 34, overflow: 'auto' },
+  homeIndicator: { position: 'absolute', bottom: 10, left: '50%', transform: 'translateX(-50%)', width: 140, height: 5, background: 'rgba(0,0,0,0.3)', borderRadius: 999, zIndex: 10 },
+  homeIndicatorDark: { background: 'rgba(255,255,255,0.5)' },
+};
+function IosFrame({ children, width = 393, height = 852, time = '9:41', battery = 100, darkMode = false, showStatusBar = true, showDynamicIsland = true, showHomeIndicator = true, screenBg }) {
+  const textColor = darkMode ? '#fff' : '#000';
+  return (
+    <div style={iosFrameStyles.wrapper}>
+      <div style={{ ...iosFrameStyles.screen, width, height, background: screenBg || (darkMode ? '#000' : '#fff') }}>
+        {showStatusBar && (
+          <div data-lint-skip="" style={{ ...iosFrameStyles.statusBar, color: textColor }}>
+            <span>{time}</span>
+            <div style={iosFrameStyles.statusIcons}>
+              <div style={iosFrameStyles.signalIcon}>
+                <div style={{ ...iosFrameStyles.signalBar, height: 4 }} /><div style={{ ...iosFrameStyles.signalBar, height: 6 }} />
+                <div style={{ ...iosFrameStyles.signalBar, height: 9 }} /><div style={{ ...iosFrameStyles.signalBar, height: 11 }} />
+              </div>
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style={{ color: textColor }}>
+                <path d="M8 11.5a1 1 0 100-2 1 1 0 000 2z" fill="currentColor" />
+                <path d="M3 7.5a7 7 0 0110 0" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+                <path d="M1 4.5a11 11 0 0114 0" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" opacity="0.7" />
+              </svg>
+              <div style={iosFrameStyles.batteryIcon}>
+                <div style={{ width: `${battery}%`, height: '100%', background: 'currentColor', borderRadius: 1, opacity: 0.9 }} />
+                <div style={iosFrameStyles.batteryCap} />
+              </div>
+            </div>
+          </div>
+        )}
+        {showDynamicIsland && <div style={iosFrameStyles.dynamicIsland} />}
+        <div style={iosFrameStyles.content}>{children}</div>
+        {showHomeIndicator && <div style={{ ...iosFrameStyles.homeIndicator, ...(darkMode ? iosFrameStyles.homeIndicatorDark : {}) }} />}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Eine Farbe pro Session: sie färbt den ganzen Bildschirm ----------
+const focusTypes = {
+  A: { name: 'Limit & Finger', hue: '#FF4646', deep: '#3D070C', mid: '#6E0E16' },
+  B: { name: 'Kraft & Antagonisten', hue: '#4D82FF', deep: '#09173D', mid: '#132B6B' },
+  C: { name: 'Kilter Power', hue: '#FF9324', deep: '#3A1A02', mid: '#6B3306' },
+  D: { name: 'Kraftausdauer', hue: '#A874FF', deep: '#1C0D3D', mid: '#35196E' },
+  E: { name: 'Mobility', hue: '#8F9094', deep: '#141416', mid: '#232326' },
+};
+const focusExercisesInit = [
+  { id: 'w', name: 'Warm-up', sub: 'Routine · 20 min', sets: 1, done: 1, core: true },
+  { id: 'h', name: 'Max Hangs', sub: '20 mm · 10 s · Pause 3:00', sets: 6, done: 3, core: true, weight: 17.5 },
+  { id: 'l', name: 'Limit-Boulder', sub: 'Moonboard 40° · 7a+–7b+', sets: 6, done: 0, core: true },
+  { id: 'p', name: 'Klimmzüge', sub: 'gewichtet · 5 × 3', sets: 5, done: 0, core: false },
+  { id: 'c', name: 'Cool-down', sub: '5–10 min', sets: 1, done: 0, core: false },
+];
+const fmtKg = (v) => (v > 0 ? '+' : '') + String(v).replace('.', ',');
+
+// ---------- Signatur: der daumengroße Satz-Knopf mit Pausenring ----------
+function FocusSetButton({ t, setNo, total, rest, restTotal = 180, onDone, onSkip, size = 236 }) {
+  const r = size / 2 - 10;
+  const C = 2 * Math.PI * r;
+  if (rest > 0) {
+    const m = Math.floor(rest / 60), s = String(rest % 60).padStart(2, '0');
+    return (
+      <button onClick={onSkip} aria-label="Pause überspringen" style={{ width: size, height: size, position: 'relative', display: 'grid', placeItems: 'center' }}>
+        <svg width={size} height={size} style={{ position: 'absolute', inset: 0, transform: 'rotate(-90deg)' }}>
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(255,255,255,.14)" strokeWidth="14" />
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={t.hue} strokeWidth="14" strokeLinecap="round"
+            strokeDasharray={`${C * (rest / restTotal)} ${C}`} style={{ transition: 'stroke-dasharray 1s linear' }} />
+        </svg>
+        <div style={{ textAlign: 'center' }}>
+          <div className="focusWide" style={{ fontSize: size * 0.24, lineHeight: 1, color: '#fff' }}>{m}:{s}</div>
+          <div style={{ fontSize: size > 200 ? 15 : 13, color: 'rgba(255,255,255,.75)', marginTop: 8, lineHeight: 1.35 }}>Pause<br />tippen = weiter</div>
+        </div>
+      </button>
+    );
+  }
+  return (
+    <button onClick={onDone} aria-label={`Satz ${setNo} geschafft`}
+      style={{ width: size, height: size, borderRadius: '50%', background: '#fff', color: t.deep, display: 'grid', placeItems: 'center',
+        boxShadow: `0 0 0 10px ${t.hue}55, 0 18px 50px rgba(0,0,0,.45)` }}>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ fontSize: 15, fontWeight: 600, color: t.mid }}>Satz {setNo} von {total}</div>
+        <div className="focusWide" style={{ fontSize: size * 0.135, lineHeight: 1.05, marginTop: 6 }}>Geschafft</div>
+      </div>
+    </button>
+  );
+}
+
+// ---------- Fokus: eine Übung pro Bildschirm ----------
+function FocusExercise({ exercises, setExercises, t }) {
+  const [idx, setIdx] = React.useState(1);
+  const [rest, setRest] = React.useState(0);
+  React.useEffect(() => {
+    if (rest <= 0) return;
+    const id = setTimeout(() => setRest((r) => Math.max(0, r - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [rest]);
+  const e = exercises[idx];
+  const next = exercises[idx + 1];
+  const setNo = Math.min(e.done + 1, e.sets);
+  const finished = e.done >= e.sets;
+  const update = (patch) => setExercises((xs) => xs.map((x, i) => i === idx ? { ...x, ...patch } : x));
+  return (
+    <div style={{ minHeight: '100%', padding: '10px 24px 22px', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 15, color: 'rgba(255,255,255,.78)' }}>
+        <span>A · {t.name}</span><span>Übung {idx + 1} von {exercises.length}</span>
+      </div>
+      <div style={{ display: 'flex', gap: 5, marginTop: 12 }}>
+        {exercises.map((x, i) => (
+          <div key={x.id} style={{ flex: 1, height: 6, borderRadius: 3, background: x.done >= x.sets ? '#fff' : i === idx ? t.hue : 'rgba(255,255,255,.18)' }} />
+        ))}
+      </div>
+      <div className="focusWide" style={{ fontSize: 50, lineHeight: 0.95, marginTop: 26, color: '#fff' }}>{e.name}</div>
+      <div style={{ fontSize: 17, color: 'rgba(255,255,255,.8)', marginTop: 10 }}>{e.sub}</div>
+
+      {e.weight !== undefined && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 22, padding: '10px 10px', borderRadius: 20, background: 'rgba(0,0,0,.25)' }}>
+          <button onClick={() => update({ weight: e.weight - 2.5 })} style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,.12)', fontSize: 28, fontWeight: 600 }} aria-label="2,5 kg weniger">−</button>
+          <div style={{ textAlign: 'center' }}>
+            <div className="focusWide" style={{ fontSize: 34, color: '#fff' }}>{fmtKg(e.weight)} kg</div>
+            <div style={{ fontSize: 13, color: 'rgba(255,255,255,.7)' }}>Ziel +15–20 kg · RPE 9</div>
+          </div>
+          <button onClick={() => update({ weight: e.weight + 2.5 })} style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,.12)', fontSize: 28, fontWeight: 600 }} aria-label="2,5 kg mehr">+</button>
+        </div>
+      )}
+
+      <div style={{ flex: 1, display: 'grid', placeItems: 'center', padding: '22px 0 14px' }}>
+        {finished
+          ? <div style={{ textAlign: 'center' }}><div className="focusWide" style={{ fontSize: 40, color: '#fff' }}>Erledigt.</div><div style={{ fontSize: 16, color: 'rgba(255,255,255,.75)', marginTop: 6 }}>Alle {e.sets} Sätze sitzen.</div></div>
+          : <FocusSetButton t={t} setNo={setNo} total={e.sets} rest={rest}
+              onDone={() => { update({ done: e.done + 1 }); if (e.done + 1 < e.sets) setRest(180); }}
+              onSkip={() => setRest(0)} />}
+      </div>
+
+      <div style={{ display: 'flex', gap: 10 }}>
+        <button onClick={() => { setIdx(Math.max(0, idx - 1)); setRest(0); }} aria-label="Vorherige Übung" style={{ width: 64, minHeight: 64, borderRadius: 20, background: 'rgba(255,255,255,.12)', fontSize: 24 }}>‹</button>
+        <button onClick={() => { setIdx(Math.min(exercises.length - 1, idx + 1)); setRest(0); }} style={{ flex: 1, minHeight: 64, borderRadius: 20, background: 'rgba(0,0,0,.28)', textAlign: 'left', padding: '0 18px' }}>
+          <div style={{ fontSize: 13, color: 'rgba(255,255,255,.7)' }}>Danach</div>
+          <div style={{ fontSize: 17, fontWeight: 600, color: '#fff' }}>{next ? next.name : 'Session beenden'}</div>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ---------- Heute: der ganze Bildschirm ist Session A ----------
+function FocusToday({ exercises, setExercises, t, onFocus }) {
+  const core = exercises.filter((e) => e.core);
+  const doneCore = core.filter((e) => e.done >= e.sets).length;
+  const toggle = (id) => setExercises((xs) => xs.map((e) => e.id === id ? { ...e, done: e.done >= e.sets ? 0 : e.sets } : e));
+  return (
+    <div style={{ padding: '6px 22px 22px', position: 'relative', overflow: 'hidden' }}>
+      <div className="focusWide" aria-hidden="true" style={{ position: 'absolute', right: -26, top: -40, fontSize: 250, lineHeight: 1, color: t.hue, opacity: 0.9 }}>A</div>
+      <div style={{ position: 'relative' }}>
+        <div style={{ fontSize: 15, color: 'rgba(255,255,255,.8)', marginTop: 8 }}>Montag · Woche 5</div>
+        <div className="focusWide" style={{ fontSize: 38, lineHeight: 0.98, marginTop: 8, color: '#fff', maxWidth: 230 }}>Limit &amp; Finger</div>
+        <div style={{ fontSize: 16, color: '#fff', marginTop: 16 }}><b className="focusWide" style={{ fontSize: 30 }}>{doneCore}/{core.length}</b> Kernübungen</div>
+        <div style={{ fontSize: 14, color: 'rgba(255,255,255,.75)', marginTop: 4 }}>Maximalkraft · ≈ 2 h · Check-in: gut</div>
+      </div>
+      <div style={{ marginTop: 22, position: 'relative' }}>
+        {exercises.map((e) => {
+          const on = e.done >= e.sets;
+          return (
+            <div key={e.id} style={{ display: 'flex', alignItems: 'center', gap: 14, minHeight: 66, borderTop: '1px solid rgba(255,255,255,.14)' }}>
+              <button onClick={() => toggle(e.id)} aria-label={`${e.name} abhaken`} style={{ width: 48, height: 48, borderRadius: 14, background: on ? '#fff' : 'transparent', border: `3px solid ${on ? '#fff' : 'rgba(255,255,255,.5)'}`, color: t.deep, display: 'grid', placeItems: 'center', fontSize: 24, fontWeight: 900, flex: 'none' }}>{on ? '✓' : ''}</button>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 18, fontWeight: 600, color: on ? 'rgba(255,255,255,.55)' : '#fff' }}>{e.name}{!e.core && <span style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,.6)' }}> · optional</span>}</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,.7)' }}>{e.sub}{e.sets > 1 ? ` · ${e.done}/${e.sets}` : ''}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <button onClick={onFocus} style={{ width: '100%', minHeight: 64, marginTop: 16, borderRadius: 22, background: '#fff', color: t.deep, fontSize: 18, fontWeight: 700 }}>Fokus starten</button>
+    </div>
+  );
+}
+
+// ---------- Woche: sieben Farbbänder ----------
+function FocusWeek() {
+  const days = [['Mo', 'A', 'läuft', true], ['Di', 'B', 'offen'], ['Mi', 'E', 'optional'], ['Do', 'C', 'offen'], ['Fr', 'E', 'optional'], ['Sa', 'D', 'offen'], ['So', 'E', 'optional']];
+  return (
+    <div style={{ padding: '6px 16px 22px' }}>
+      <div className="focusWide" style={{ fontSize: 34, color: '#fff', margin: '8px 6px 4px' }}>Woche 5</div>
+      <div style={{ fontSize: 15, color: 'rgba(255,255,255,.72)', margin: '0 6px 16px' }}>Maximalkraft · Lasten etablieren</div>
+      {days.map(([d, k, s, now]) => {
+        const t = focusTypes[k];
+        const opt = k === 'E';
+        return (
+          <div key={d} style={{ display: 'flex', alignItems: 'center', gap: 14, height: opt ? 46 : now ? 112 : 84, marginBottom: 6, padding: '0 16px', borderRadius: 20,
+            background: opt ? 'rgba(255,255,255,.05)' : `linear-gradient(120deg, ${t.mid}, ${t.deep})`, border: now ? `2px solid ${t.hue}` : '2px solid transparent' }}>
+            <span style={{ width: 28, fontSize: 15, color: 'rgba(255,255,255,.75)' }}>{d}</span>
+            {!opt && <span className="focusWide" style={{ fontSize: now ? 48 : 34, color: t.hue, width: now ? 46 : 34 }}>{k}</span>}
+            <span style={{ flex: 1, fontSize: opt ? 14 : 17, fontWeight: opt ? 400 : 600, color: opt ? 'rgba(255,255,255,.6)' : '#fff' }}>{opt ? 'Mobility (optional)' : t.name}</span>
+            <span style={{ fontSize: 13, color: now ? '#fff' : 'rgba(255,255,255,.6)' }}>{s}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function FocusTabs({ screen, onTab, t }) {
+  const tabs = [['today', 'Heute'], ['focus', 'Fokus'], ['week', 'Woche'], ['plan', 'Plan']];
+  return (
+    <div style={{ position: 'sticky', bottom: 0, display: 'flex', gap: 6, padding: '8px 12px 6px', background: 'rgba(0,0,0,.35)', backdropFilter: 'blur(16px)' }}>
+      {tabs.map(([id, l]) => (
+        <button key={id} onClick={() => onTab(id)} style={{ flex: 1, minHeight: 50, borderRadius: 14, fontSize: 15, fontWeight: 600, background: screen === id ? 'rgba(255,255,255,.16)' : 'transparent', color: screen === id ? '#fff' : 'rgba(255,255,255,.62)' }}>{l}</button>
+      ))}
+    </div>
+  );
+}
+
+function FocusPhone({ initial }) {
+  const [screen, setScreen] = React.useState(initial);
+  const [exercises, setExercises] = React.useState(focusExercisesInit);
+  const t = focusTypes.A;
+  const bg = screen === 'week' || screen === 'plan' ? '#0E0E10' : `linear-gradient(180deg, ${t.mid} 0%, ${t.deep} 62%)`;
+  return (
+    <IosFrame darkMode screenBg={screen === 'week' || screen === 'plan' ? '#0E0E10' : t.mid}>
+      <div style={{ minHeight: '100%', background: bg, color: '#fff', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          {screen === 'today' && <FocusToday exercises={exercises} setExercises={setExercises} t={t} onFocus={() => setScreen('focus')} />}
+          {screen === 'focus' && <FocusExercise exercises={exercises} setExercises={setExercises} t={t} />}
+          {(screen === 'week' || screen === 'plan') && <FocusWeek />}
+        </div>
+        <FocusTabs screen={screen} onTab={setScreen} t={t} />
+      </div>
+    </IosFrame>
+  );
+}
+
+// ---------- Tafel: Fokus-Bildschirm groß, Knopf in Nahaufnahme, Rest daneben ----------
+function FocusShowcase() {
+  const t = focusTypes.A;
+  const lab = (title, note, w) => (
+    <div style={{ width: w, marginBottom: 12 }}>
+      <div style={{ fontSize: 17, fontWeight: 600, color: '#fff' }}>{title}</div>
+      <div style={{ fontSize: 14, color: '#A3A3A8', marginTop: 2, lineHeight: 1.45 }}>{note}</div>
+    </div>
+  );
+  const phone = (initial, s) => (
+    <div style={{ width: 417 * s, height: 876 * s }}>
+      <div style={{ transform: `scale(${s})`, transformOrigin: '0 0', width: 417 }}><FocusPhone initial={initial} /></div>
+    </div>
+  );
+  return (
+    <div style={{ width: 1440, height: 1320, background: '#0A0A0B', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', left: 64, top: 56, width: 560 }}>
+        <div style={{ fontSize: 15, fontWeight: 600, color: t.hue }}>Richtung 3</div>
+        <div className="focusWide" style={{ fontSize: 88, lineHeight: 0.95, marginTop: 8 }}>Fokus</div>
+        <div style={{ fontSize: 17, lineHeight: 1.6, color: '#D4D4D8', marginTop: 18 }}>
+          Mitten im Training, Kreide an den Fingern, das Telefon liegt auf der Matte. Darum: eine Übung pro Bildschirm,
+          ein Knopf so groß wie ein Daumen, und jede Session färbt den ganzen Bildschirm. Rot heißt Fingertag, ohne zu lesen.
+        </div>
+      </div>
+      <div style={{ position: 'absolute', left: 64, top: 330 }}>
+        {lab('Fokus', 'Eine Übung, ein Gewicht, ein Knopf. Nach dem Satz läuft die Pause im selben Kreis.', 380)}
+        {phone('focus', 0.95)}
+      </div>
+      <div style={{ position: 'absolute', left: 540, top: 330, width: 430 }}>
+        {lab('Nahaufnahme: der Satz-Knopf', '236 px Durchmesser, trifft man auch mit Kreide und ohne hinzusehen. Antippen startet 3:00 Pause.', 430)}
+        <div style={{ height: 560, borderRadius: 28, background: `radial-gradient(circle at 50% 45%, ${t.mid}, ${t.deep} 70%)`, display: 'grid', placeItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 26, alignItems: 'center', flexDirection: 'column' }}>
+            <FocusSetButton t={t} setNo={4} total={6} rest={0} onDone={() => {}} size={236} />
+            <FocusSetButton t={t} setNo={4} total={6} rest={161} onSkip={() => {}} size={180} />
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 10, marginTop: 22 }}>
+          {['A', 'B', 'C', 'D'].map((k) => (
+            <div key={k} style={{ flex: 1, height: 86, borderRadius: 18, background: `linear-gradient(140deg, ${focusTypes[k].mid}, ${focusTypes[k].deep})`, padding: 12, boxSizing: 'border-box' }}>
+              <div className="focusWide" style={{ fontSize: 28, color: focusTypes[k].hue, lineHeight: 1 }}>{k}</div>
+              <div style={{ fontSize: 12, color: '#fff', marginTop: 8 }}>{focusTypes[k].name}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ fontSize: 13, color: '#A3A3A8', marginTop: 12, lineHeight: 1.5 }}>Geliehen von Bevel: jede Kategorie besitzt eine Farbe, die beim Eintreten den ganzen Bildschirm färbt. Schrift: Archivo Expanded Black + Inter.</div>
+      </div>
+      <div style={{ position: 'absolute', left: 1030, top: 120 }}>
+        {lab('Heute', 'Session A färbt alles rot. „Fokus starten“ öffnet Übung für Übung.', 330)}
+        {phone('today', 0.74)}
+      </div>
+      <div style={{ position: 'absolute', left: 1030, top: 870 }}>
+        {lab('Woche', 'Sieben Farbbänder, heute am größten.', 330)}
+        <div style={{ width: 417 * 0.74, height: 380, overflow: 'hidden', borderRadius: '44px 44px 0 0' }}>
+          <div style={{ transform: 'scale(0.74)', transformOrigin: '0 0', width: 417 }}><FocusPhone initial="week" /></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<FocusShowcase />);
+</script>
+</body>
+</html>

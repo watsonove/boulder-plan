@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Boulder Plan · Richtung 2 · Kreide</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html, body { margin: 0; background: #161716; }
+  body { font-family: "Geist", -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+  * { scrollbar-width: none; } *::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body>
+<!-- Kreide-Textur: leichte Verzerrung + Körnung für alle Kreidestriche -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="chalkRough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G" result="d" />
+      <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="9" result="g" />
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -0.75 1.3" result="mask" />
+      <feComposite in="d" in2="mask" operator="in" />
+    </filter>
+  </defs>
+</svg>
+<div id="root"></div>
+
+<script type="text/babel">
+// ---------- iOS-Rahmen (assets/ios_frame.jsx) ----------
+const iosFrameStyles = {
+  wrapper: { display: 'inline-block', padding: 12, background: '#000', borderRadius: 60, boxShadow: '0 0 0 2px #1f2937, 0 20px 60px rgba(0,0,0,0.3)', position: 'relative' },
+  screen: { position: 'relative', borderRadius: 48, overflow: 'hidden', background: '#fff' },
+  statusBar: { position: 'absolute', top: 0, left: 0, right: 0, height: 54, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px 0 32px', fontSize: 16, fontWeight: 600, fontFamily: '-apple-system, "SF Pro Text", sans-serif', zIndex: 20, pointerEvents: 'none' },
+  dynamicIsland: { position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)', width: 124, height: 36, background: '#000', borderRadius: 999, zIndex: 30 },
+  statusIcons: { display: 'flex', alignItems: 'center', gap: 6 },
+  signalIcon: { display: 'flex', alignItems: 'flex-end', gap: 2, height: 12 },
+  signalBar: { width: 3, background: 'currentColor', borderRadius: 1 },
+  batteryIcon: { width: 26, height: 12, border: '1.5px solid currentColor', borderRadius: 3, padding: 1, position: 'relative', opacity: 0.8 },
+  batteryCap: { position: 'absolute', top: 3, right: -3, width: 2, height: 6, background: 'currentColor', borderRadius: '0 1px 1px 0' },
+  content: { position: 'absolute', top: 54, left: 0, right: 0, bottom: 34, overflow: 'auto' },
+  homeIndicator: { position: 'absolute', bottom: 10, left: '50%', transform: 'translateX(-50%)', width: 140, height: 5, background: 'rgba(0,0,0,0.3)', borderRadius: 999, zIndex: 10 },
+  homeIndicatorDark: { background: 'rgba(255,255,255,0.5)' },
+};
+function IosFrame({ children, width = 393, height = 852, time = '9:41', battery = 100, darkMode = false, showStatusBar = true, showDynamicIsland = true, showHomeIndicator = true, screenBg }) {
+  const textColor = darkMode ? '#fff' : '#000';
+  return (
+    <div style={iosFrameStyles.wrapper}>
+      <div style={{ ...iosFrameStyles.screen, width, height, background: screenBg || (darkMode ? '#000' : '#fff') }}>
+        {showStatusBar && (
+          <div data-lint-skip="" style={{ ...iosFrameStyles.statusBar, color: textColor }}>
+            <span>{time}</span>
+            <div style={iosFrameStyles.statusIcons}>
+              <div style={iosFrameStyles.signalIcon}>
+                <div style={{ ...iosFrameStyles.signalBar, height: 4 }} /><div style={{ ...iosFrameStyles.signalBar, height: 6 }} />
+                <div style={{ ...iosFrameStyles.signalBar, height: 9 }} /><div style={{ ...iosFrameStyles.signalBar, height: 11 }} />
+              </div>
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style={{ color: textColor }}>
+                <path d="M8 11.5a1 1 0 100-2 1 1 0 000 2z" fill="currentColor" />
+                <path d="M3 7.5a7 7 0 0110 0" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+                <path d="M1 4.5a11 11 0 0114 0" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" opacity="0.7" />
+              </svg>
+              <div style={iosFrameStyles.batteryIcon}>
+                <div style={{ width: `${battery}%`, height: '100%', background: 'currentColor', borderRadius: 1, opacity: 0.9 }} />
+                <div style={iosFrameStyles.batteryCap} />
+              </div>
+            </div>
+          </div>
+        )}
+        {showDynamicIsland && <div style={iosFrameStyles.dynamicIsland} />}
+        <div style={iosFrameStyles.content}>{children}</div>
+        {showHomeIndicator && <div style={{ ...iosFrameStyles.homeIndicator, ...(darkMode ? iosFrameStyles.homeIndicatorDark : {}) }} />}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Farben & Daten ----------
+const chalk = { bg: '#1C1D1C', fg: '#EEEAE0', muted: '#96938B', faint: 'rgba(238,234,224,.16)', accent: '#F28C4A' };
+const chalkSerif = '"Newsreader", Georgia, serif';
+const chalkMono = '"Geist Mono", ui-monospace, monospace';
+const chalkExercisesInit = [
+  { id: 'w', name: 'Warm-up-Routine', pres: '20 min · locker → RPE 6', min: 20, sets: 1, done: 1 },
+  { id: 'h', name: 'Max Hangs 20 mm', pres: '6 × 10 s · Pause 3 min · +15–20 kg', min: 25, sets: 6, done: 3 },
+  { id: 'l', name: 'Moonboard 40° Limit', pres: '6 Probleme · 3–4 Versuche · 7a+–7b+', min: 60, sets: 6, done: 0 },
+  { id: 'p', name: 'Gewichtete Klimmzüge', pres: '5 × 3 · +25–35 kg', min: 18, sets: 5, done: 0, optional: true },
+  { id: 'c', name: 'Cool-down', pres: '5–10 min', min: 8, sets: 1, done: 0, optional: true },
+];
+
+// ---------- Kreide-Strichliste: |||| mit Querstrich, so wie man Versuche an die Wand schreibt ----------
+function ChalkTally({ done, total, h = 40, onTap }) {
+  const strokes = [];
+  const gap = 15;
+  let x = 6;
+  for (let i = 0; i < total; i++) {
+    const inGroup = i % 5;
+    const on = i < done;
+    const col = on ? chalk.fg : 'rgba(238,234,224,.13)';
+    if (inGroup === 4) {
+      // Querstrich über die vorigen vier
+      strokes.push(<line key={i} x1={x - 4 * gap - 2} y1={h - 9} x2={x - 6} y2={9} stroke={col} strokeWidth="4.5" strokeLinecap="round" />);
+      x += 16;
+    } else {
+      const jitter = [1.2, -1.4, 0.8, -0.6][inGroup];
+      strokes.push(<line key={i} x1={x + jitter} y1={5} x2={x - jitter} y2={h - 5} stroke={col} strokeWidth="4.5" strokeLinecap="round" />);
+      x += gap;
+    }
+  }
+  return (
+    <button onClick={onTap} aria-label={`${done} von ${total} Sätzen`} style={{ display: 'flex', alignItems: 'center', gap: 10, minHeight: 44 }}>
+      <svg width={x + 4} height={h} style={{ filter: 'url(#chalkRough)', overflow: 'visible' }}>{strokes}</svg>
+      <span style={{ fontFamily: chalkMono, fontSize: 13, color: chalk.muted }}>{done}/{total}</span>
+    </button>
+  );
+}
+
+// ---------- Heute: senkrechte Zeitachse, Kapsellänge = Dauer ----------
+function ChalkToday({ exercises, setExercises }) {
+  const PX = 3.1;
+  let t = 0;
+  const fmt = (m) => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+  const tap = (id) => setExercises((xs) => xs.map((e) => e.id === id ? { ...e, done: e.done >= e.sets ? 0 : e.done + 1 } : e));
+  const toggle = (id) => setExercises((xs) => xs.map((e) => e.id === id ? { ...e, done: e.done >= e.sets ? 0 : e.sets } : e));
+  const totalMin = exercises.reduce((a, e) => a + e.min, 0);
+  const doneMin = exercises.reduce((a, e) => a + e.min * (e.done / e.sets), 0);
+  return (
+    <div style={{ padding: '14px 22px 26px' }}>
+      <div style={{ fontSize: 15, color: chalk.muted }}>Montag · Woche 5 · Maximalkraft</div>
+      <div style={{ fontSize: 34, fontWeight: 600, letterSpacing: -0.8, lineHeight: 1.08, marginTop: 6 }}>Limit & Finger</div>
+      <div style={{ fontFamily: chalkSerif, fontStyle: 'italic', fontSize: 19, color: chalk.fg, opacity: 0.85, marginTop: 8 }}>
+        {Math.round(doneMin)} von {totalMin} Minuten hinter dir. Der lange Block kommt noch.
+      </div>
+
+      <div style={{ position: 'relative', marginTop: 24 }}>
+        {exercises.map((e) => {
+          const start = t; t += e.min;
+          const full = e.done >= e.sets;
+          const hgt = Math.max(e.min * PX, 46);
+          const partial = e.done / e.sets;
+          return (
+            <div key={e.id} style={{ display: 'flex', gap: 14, marginBottom: 12, opacity: e.optional && !full ? 0.82 : 1 }}>
+              <div style={{ width: 34, fontFamily: chalkMono, fontSize: 12, color: chalk.muted, paddingTop: 2, textAlign: 'right' }}>{fmt(start)}</div>
+              {/* Kapsel: Höhe = Minuten; Füllung = erledigter Anteil */}
+              <button onClick={() => toggle(e.id)} aria-label={`${e.name} abhaken`} style={{ width: 30, height: hgt, position: 'relative', flex: 'none' }}>
+                <svg width="30" height={hgt} style={{ filter: 'url(#chalkRough)', position: 'absolute', inset: 0 }}>
+                  <rect x="3" y="2" width="24" height={hgt - 4} rx="12" fill="none" stroke={full ? chalk.fg : 'rgba(238,234,224,.55)'} strokeWidth="2.5" />
+                  <rect x="7" y={2 + (hgt - 4) * (1 - partial) + 4} width="16" height={Math.max((hgt - 4) * partial - 8, 0)} rx="8" fill={chalk.fg} opacity=".9" />
+                </svg>
+              </button>
+              <div style={{ flex: 1, minWidth: 0, paddingTop: 0 }}>
+                <div style={{ fontSize: 17, fontWeight: 600, color: full ? chalk.muted : chalk.fg, textDecoration: full ? 'line-through' : 'none', textDecorationColor: chalk.muted }}>{e.name}</div>
+                <div style={{ fontSize: 13.5, color: chalk.muted, marginTop: 2 }}>{e.pres}{e.optional ? ' · optional' : ''}</div>
+                {e.sets > 1 && <div style={{ marginTop: 4 }}><ChalkTally done={e.done} total={e.sets} onTap={() => tap(e.id)} /></div>}
+              </div>
+            </div>
+          );
+        })}
+        {/* Jetzt-Marke */}
+        <div style={{ position: 'absolute', left: 36, top: 20 * 3.1 + 12 + 25 * 3.1 * 0.5, display: 'flex', alignItems: 'center', gap: 6, pointerEvents: 'none' }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: chalk.accent, boxShadow: `0 0 0 4px ${chalk.accent}33` }} />
+        </div>
+      </div>
+      <div style={{ fontSize: 13, color: chalk.muted, marginTop: 6, lineHeight: 1.5 }}>Kapsel antippen = Übung erledigt. Strichliste antippen = ein Satz mehr.</div>
+    </div>
+  );
+}
+
+// ---------- Plan: Periodisierung als Kreidekurve ----------
+function ChalkPlan() {
+  const [sel, setSel] = React.useState(5);
+  const W = 349, H = 190, pad = 14;
+  const intensity = [40, 45, 50, 30, 70, 78, 86, 35, 80, 85, 90, 55];
+  const volume = [70, 78, 85, 45, 55, 52, 50, 35, 48, 45, 42, 25];
+  const x = (i) => pad + (i * (W - 2 * pad)) / 11;
+  const y = (v) => H - 20 - (v / 100) * (H - 40);
+  const path = (arr) => arr.map((v, i) => {
+    if (i === 0) return `M${x(0)},${y(v)}`;
+    const cx = (x(i - 1) + x(i)) / 2;
+    return `C${cx},${y(arr[i - 1])} ${cx},${y(v)} ${x(i)},${y(v)}`;
+  }).join(' ');
+  const phases = { 1: 'Basis', 2: 'Basis', 3: 'Basis', 4: 'Deload', 5: 'Maximalkraft', 6: 'Maximalkraft', 7: 'Maximalkraft', 8: 'Deload', 9: 'Power', 10: 'Power', 11: 'Power', 12: 'Taper & Test' };
+  const focus = { 4: 'Weniger von allem. Keine Limit-Versuche.', 5: 'Lasten etablieren: Max Hangs +15–20 kg, Klimmzüge 5 × 3.', 8: 'Erholen, Bewegungsqualität.', 12: 'Frisch werden, Benchmarks aus Woche 1 wiederholen.' };
+  const week = [['Mo', 'A', 'Limit & Finger', 'läuft'], ['Di', 'B', 'Kraft & Antagonisten', ''], ['Do', 'C', 'Kilter Power', ''], ['Sa', 'D', 'Kraftausdauer', '']];
+  return (
+    <div style={{ padding: '14px 22px 26px' }}>
+      <div style={{ fontSize: 15, color: chalk.muted }}>12 Wochen</div>
+      <div style={{ fontFamily: chalkSerif, fontStyle: 'italic', fontSize: 30, lineHeight: 1.15, marginTop: 4 }}>Die Kurve steigt.<br />Du bist bei Woche {sel}.</div>
+      <svg width={W} height={H + 26} style={{ marginTop: 18, overflow: 'visible' }}>
+        <g style={{ filter: 'url(#chalkRough)' }}>
+          <path d={path(volume)} fill="none" stroke={chalk.muted} strokeWidth="2" strokeDasharray="4 6" strokeLinecap="round" />
+          <path d={path(intensity)} fill="none" stroke={chalk.fg} strokeWidth="3" strokeLinecap="round" />
+        </g>
+        {intensity.map((v, i) => (
+          <g key={i} onClick={() => setSel(i + 1)} style={{ cursor: 'pointer' }}>
+            <rect x={x(i) - 14} y={0} width={28} height={H + 26} fill="transparent" />
+            <circle cx={x(i)} cy={y(v)} r={sel === i + 1 ? 7 : 3} fill={sel === i + 1 ? chalk.accent : chalk.fg} />
+            <text x={x(i)} y={H + 20} textAnchor="middle" fontFamily={chalkMono} fontSize="12" fill={sel === i + 1 ? chalk.accent : chalk.muted}>{i + 1}</text>
+          </g>
+        ))}
+        <text x={W - 2} y={y(intensity[10]) - 14} textAnchor="end" fontSize="12" fill={chalk.fg} fontFamily="Geist">Intensität</text>
+        <text x={W - 2} y={y(volume[11]) + 22} textAnchor="end" fontSize="12" fill={chalk.muted} fontFamily="Geist">Volumen</text>
+      </svg>
+      <div style={{ marginTop: 10, paddingTop: 14, borderTop: `1px solid ${chalk.faint}` }}>
+        <div style={{ fontSize: 18, fontWeight: 600 }}>Woche {sel} · {phases[sel]}</div>
+        <div style={{ fontSize: 14.5, color: chalk.muted, marginTop: 4, lineHeight: 1.5 }}>{focus[sel] || 'Tippe eine Woche an, um ihren Schwerpunkt zu sehen.'}</div>
+      </div>
+      <div style={{ marginTop: 16 }}>
+        {week.map(([d, t, n, s]) => (
+          <div key={d} style={{ display: 'flex', alignItems: 'center', gap: 14, minHeight: 50, borderTop: `1px solid ${chalk.faint}` }}>
+            <span style={{ fontFamily: chalkMono, fontSize: 13, color: chalk.muted, width: 26 }}>{d}</span>
+            <span style={{ fontWeight: 600, width: 18 }}>{t}</span>
+            <span style={{ flex: 1 }}>{n}</span>
+            <span style={{ fontSize: 13, color: s ? chalk.accent : chalk.muted }}>{s || 'offen'}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Check-in: erst das Urteil, dann die Zahlen ----------
+function ChalkCheckIn() {
+  const [v, setV] = React.useState({ s: 4, e: 3, f: 4 });
+  const avg = (v.s + v.e + v.f) / 3;
+  const low = Math.min(v.s, v.e, v.f) <= 2 || avg < 2.7;
+  const rows = [['s', 'Schlaf'], ['e', 'Energie'], ['f', 'Fingergefühl']];
+  return (
+    <div style={{ padding: '14px 22px 26px' }}>
+      <div style={{ fontSize: 15, color: chalk.muted }}>Check-in vor Session A</div>
+      <div style={{ fontFamily: chalkSerif, fontStyle: 'italic', fontSize: 46, lineHeight: 1.02, marginTop: 10, color: low ? chalk.accent : chalk.fg }}>
+        {low ? 'Heute schonen.' : 'Heute ziehen.'}
+      </div>
+      <div style={{ fontSize: 15.5, color: chalk.fg, opacity: 0.8, marginTop: 10, lineHeight: 1.5 }}>
+        {low ? 'Ein Satz weniger pro Übung, die Limit-Boulder lassen wir weg.' : 'Volle Max Hangs, Limit-Boulder frei. Bei 3/5 Energie: lange Pausen ernst nehmen.'}
+      </div>
+      <div style={{ fontFamily: chalkMono, fontSize: 13, color: chalk.muted, marginTop: 10 }}>Schnitt {avg.toFixed(1).replace('.', ',')} von 5</div>
+      {rows.map(([k, label]) => (
+        <div key={k} style={{ marginTop: 26 }}>
+          <div style={{ fontSize: 16, fontWeight: 600 }}>{label}</div>
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: 8, position: 'relative', height: 52 }}>
+            <svg width="349" height="52" style={{ position: 'absolute', inset: 0, filter: 'url(#chalkRough)', pointerEvents: 'none' }}>
+              <line x1="14" y1="26" x2="335" y2="26" stroke={chalk.faint} strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="14" y1="26" x2={14 + (v[k] - 1) * 80.25} y2="26" stroke={chalk.fg} strokeWidth="3.5" strokeLinecap="round" />
+            </svg>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button key={n} onClick={() => setV({ ...v, [k]: n })} aria-label={`${label} ${n}`}
+                style={{ position: 'absolute', left: 14 + (n - 1) * 80.25 - 24, width: 48, height: 52, display: 'grid', placeItems: 'center' }}>
+                <span style={{ width: n === v[k] ? 26 : 12, height: n === v[k] ? 26 : 12, borderRadius: '50%', background: n <= v[k] ? chalk.fg : chalk.bg, border: `2px solid ${n <= v[k] ? chalk.fg : 'rgba(238,234,224,.4)'}`, display: 'grid', placeItems: 'center', fontFamily: chalkMono, fontSize: 13, color: chalk.bg, fontWeight: 500 }}>{n === v[k] ? n : ''}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <button style={{ width: '100%', minHeight: 56, marginTop: 26, borderRadius: 28, background: chalk.fg, color: chalk.bg, fontSize: 17, fontWeight: 600, textAlign: 'center' }}>Los geht's</button>
+    </div>
+  );
+}
+
+function ChalkTabs({ screen, onTab }) {
+  const tabs = [['check', 'Check-in'], ['today', 'Heute'], ['plan', 'Plan'], ['stats', 'Werte']];
+  return (
+    <div style={{ position: 'sticky', bottom: 0, display: 'flex', gap: 4, padding: '6px 14px 4px', background: 'rgba(28,29,28,.95)', borderTop: `1px solid ${chalk.faint}` }}>
+      {tabs.map(([id, l]) => (
+        <button key={id} onClick={() => onTab(id)} style={{ flex: 1, minHeight: 50, textAlign: 'center', fontSize: 14, fontWeight: screen === id ? 600 : 400, color: screen === id ? chalk.fg : chalk.muted }}>
+          {l}
+          <div style={{ height: 3, width: 22, margin: '5px auto 0', borderRadius: 2, background: screen === id ? chalk.accent : 'transparent' }} />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ChalkStats() {
+  return (
+    <div style={{ padding: '14px 22px 26px' }}>
+      <div style={{ fontFamily: chalkSerif, fontStyle: 'italic', fontSize: 30, lineHeight: 1.15 }}>13 Sessions in Folge.</div>
+      <div style={{ fontSize: 14.5, color: chalk.muted, marginTop: 6 }}>Seit Woche 2 nichts verpasst.</div>
+      <div style={{ marginTop: 18 }}><ChalkTally done={13} total={15} h={36} /></div>
+      {[['Max Hang 20 mm', '+12,5 kg', 'Woche 12'], ['3RM Klimmzug', '+22,5 kg', 'Woche 12'], ['Moonboard', '7a+', 'Woche 12'], ['Kilter 40°', '7a+', 'Woche 12']].map(([n, a, b]) => (
+        <div key={n} style={{ display: 'flex', justifyContent: 'space-between', minHeight: 52, alignItems: 'center', borderTop: `1px solid ${chalk.faint}` }}>
+          <span>{n}</span><span style={{ fontFamily: chalkMono, fontSize: 14 }}>{a} <span style={{ color: chalk.muted }}>· {b} offen</span></span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ChalkPhone({ initial }) {
+  const [screen, setScreen] = React.useState(initial);
+  const [exercises, setExercises] = React.useState(chalkExercisesInit);
+  return (
+    <IosFrame darkMode screenBg={chalk.bg}>
+      <div style={{ minHeight: '100%', background: chalk.bg, color: chalk.fg, display: 'flex', flexDirection: 'column', fontFamily: '"Geist", -apple-system, sans-serif' }}>
+        <div style={{ flex: 1 }}>
+          {screen === 'today' && <ChalkToday exercises={exercises} setExercises={setExercises} />}
+          {screen === 'plan' && <ChalkPlan />}
+          {screen === 'check' && <ChalkCheckIn />}
+          {screen === 'stats' && <ChalkStats />}
+        </div>
+        <ChalkTabs screen={screen} onTab={setScreen} />
+      </div>
+    </IosFrame>
+  );
+}
+
+// ---------- Tafel: Ablauf Check-in → Heute → Plan ----------
+function ChalkShowcase() {
+  const place = [
+    { id: 'check', x: 64, y: 360, s: 0.76, t: 'Check-in', n: 'Zuerst das Urteil in einem Satz, dann die Zahlen.' },
+    { id: 'today', x: 488, y: 270, s: 0.92, t: 'Heute', n: 'Die Session als Zeitachse: Kapsellänge = Minuten. Sätze sind Kreidestriche.' },
+    { id: 'plan', x: 1040, y: 380, s: 0.76, t: 'Plan', n: '12 Wochen als Kurve: Intensität steigt, Volumen fällt, Deloads sind Täler.' },
+  ];
+  const mid = (p, side) => ({ x: side === 'r' ? p.x + 417 * p.s : p.x, y: p.y + 70 + 876 * p.s * 0.45 });
+  const lines = [[place[0], place[1], '„Heute ziehen.“'], [place[1], place[2], 'Tab „Plan“']];
+  return (
+    <div style={{ width: 1440, height: 1250, background: '#161716', color: chalk.fg, position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', left: 64, top: 60, width: 760 }}>
+        <div style={{ fontSize: 15, color: chalk.accent, fontWeight: 600 }}>Richtung 2</div>
+        <div style={{ fontFamily: chalkSerif, fontStyle: 'italic', fontSize: 84, lineHeight: 1, marginTop: 6 }}>Kreide</div>
+        <div style={{ fontSize: 17, lineHeight: 1.6, opacity: 0.85, marginTop: 16, maxWidth: 640 }}>
+          Das Material des Kletterns ist Magnesia. Hier gibt es fast keine Rahmen, nur Striche auf dunklem Grund.
+          Sätze werden gezählt, wie man Versuche an die Wand schreibt, und die Session zeigt, wohin die Zeit geht.
+        </div>
+      </div>
+      <div style={{ position: 'absolute', left: 900, top: 74, width: 470, fontSize: 14, lineHeight: 1.6, color: chalk.muted }}>
+        Geliehen: von <b style={{ color: chalk.fg }}>Structured</b> die Zeitachse mit Kapseln, deren Länge der Dauer entspricht;
+        von <b style={{ color: chalk.fg }}>Bevel</b> das Urteil vor der Zahl. Haltung nach Kenya Hara: das Material ist der Held.
+        Eine einzige Akzentfarbe, nur für „jetzt“.
+      </div>
+      <svg width="1440" height="1380" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+        {lines.map(([a, b, via], i) => {
+          const p = mid(a, 'r'), q = mid(b, 'l');
+          return (
+            <g key={i}>
+              <path d={`M${p.x + 8},${p.y} C${(p.x + q.x) / 2},${p.y} ${(p.x + q.x) / 2},${q.y} ${q.x - 8},${q.y}`} fill="none" stroke={chalk.accent} strokeWidth="2" strokeDasharray="5 6" />
+              <text x={(p.x + q.x) / 2} y={(p.y + q.y) / 2 - 14} textAnchor="middle" fontSize="14" fill={chalk.muted} fontFamily="Geist">{via}</text>
+            </g>
+          );
+        })}
+      </svg>
+      {place.map((p) => (
+        <div key={p.id} style={{ position: 'absolute', left: p.x, top: p.y }}>
+          <div style={{ width: 417 * p.s, marginBottom: 12 }}>
+            <div style={{ fontSize: 17, fontWeight: 600 }}>{p.t}</div>
+            <div style={{ fontSize: 14, color: chalk.muted, marginTop: 2, lineHeight: 1.45 }}>{p.n}</div>
+          </div>
+          <div style={{ width: 417 * p.s, height: 876 * p.s }}>
+            <div style={{ transform: `scale(${p.s})`, transformOrigin: '0 0', width: 417 }}><ChalkPhone initial={p.id} /></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<ChalkShowcase />);
+</script>
+</body>
+</html>

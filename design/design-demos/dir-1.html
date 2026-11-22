@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Boulder Plan · Richtung 1 · Das Board</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html, body { margin: 0; background: #0b0c0c; }
+  body { font-family: "Familjen Grotesk", -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  * { scrollbar-width: none; } *::-webkit-scrollbar { display: none; }
+  @keyframes boardPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,.55), 0 0 10px rgba(255,255,255,.35); } 50% { box-shadow: 0 0 0 5px rgba(255,255,255,0), 0 0 16px rgba(255,255,255,.55); } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// ---------- iOS-Rahmen (aus assets/ios_frame.jsx, unverändert) ----------
+const iosFrameStyles = {
+  wrapper: { display: 'inline-block', padding: 12, background: '#000', borderRadius: 60, boxShadow: '0 0 0 2px #1f2937, 0 20px 60px rgba(0,0,0,0.3)', position: 'relative' },
+  screen: { position: 'relative', borderRadius: 48, overflow: 'hidden', background: '#fff' },
+  statusBar: { position: 'absolute', top: 0, left: 0, right: 0, height: 54, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px 0 32px', fontSize: 16, fontWeight: 600, fontFamily: '-apple-system, "SF Pro Text", sans-serif', zIndex: 20, pointerEvents: 'none' },
+  dynamicIsland: { position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)', width: 124, height: 36, background: '#000', borderRadius: 999, zIndex: 30 },
+  statusIcons: { display: 'flex', alignItems: 'center', gap: 6 },
+  signalIcon: { display: 'flex', alignItems: 'flex-end', gap: 2, height: 12 },
+  signalBar: { width: 3, background: 'currentColor', borderRadius: 1 },
+  batteryIcon: { width: 26, height: 12, border: '1.5px solid currentColor', borderRadius: 3, padding: 1, position: 'relative', opacity: 0.8 },
+  batteryCap: { position: 'absolute', top: 3, right: -3, width: 2, height: 6, background: 'currentColor', borderRadius: '0 1px 1px 0' },
+  content: { position: 'absolute', top: 54, left: 0, right: 0, bottom: 34, overflow: 'auto' },
+  homeIndicator: { position: 'absolute', bottom: 10, left: '50%', transform: 'translateX(-50%)', width: 140, height: 5, background: 'rgba(0,0,0,0.3)', borderRadius: 999, zIndex: 10 },
+  homeIndicatorDark: { background: 'rgba(255,255,255,0.5)' },
+};
+function IosFrame({ children, width = 393, height = 852, time = '9:41', battery = 100, darkMode = false, showStatusBar = true, showDynamicIsland = true, showHomeIndicator = true, screenBg }) {
+  const textColor = darkMode ? '#fff' : '#000';
+  return (
+    <div style={iosFrameStyles.wrapper}>
+      <div style={{ ...iosFrameStyles.screen, width, height, background: screenBg || (darkMode ? '#000' : '#fff') }}>
+        {showStatusBar && (
+          <div data-lint-skip="" style={{ ...iosFrameStyles.statusBar, color: textColor }}>
+            <span>{time}</span>
+            <div style={iosFrameStyles.statusIcons}>
+              <div style={iosFrameStyles.signalIcon}>
+                <div style={{ ...iosFrameStyles.signalBar, height: 4 }} /><div style={{ ...iosFrameStyles.signalBar, height: 6 }} />
+                <div style={{ ...iosFrameStyles.signalBar, height: 9 }} /><div style={{ ...iosFrameStyles.signalBar, height: 11 }} />
+              </div>
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style={{ color: textColor }}>
+                <path d="M8 11.5a1 1 0 100-2 1 1 0 000 2z" fill="currentColor" />
+                <path d="M3 7.5a7 7 0 0110 0" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+                <path d="M1 4.5a11 11 0 0114 0" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" opacity="0.7" />
+              </svg>
+              <div style={iosFrameStyles.batteryIcon}>
+                <div style={{ width: `${battery}%`, height: '100%', background: 'currentColor', borderRadius: 1, opacity: 0.9 }} />
+                <div style={iosFrameStyles.batteryCap} />
+              </div>
+            </div>
+          </div>
+        )}
+        {showDynamicIsland && <div style={iosFrameStyles.dynamicIsland} />}
+        <div style={iosFrameStyles.content}>{children}</div>
+        {showHomeIndicator && <div style={{ ...iosFrameStyles.homeIndicator, ...(darkMode ? iosFrameStyles.homeIndicatorDark : {}) }} />}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Inhalt (echte Daten aus plan_seed.json) ----------
+const boardLed = { A: '#FF2BD6', B: '#22E1F0', C: '#3CF06B', D: '#FF9B1F', E: '#BDBDBD', T: '#F5E14B' };
+const boardTypeName = { A: 'Limit & Finger', B: 'Kraft & Antagonisten', C: 'Kilter Power', D: 'Kraftausdauer', E: 'Mobility' };
+const boardPhases = [
+  { name: 'Basis', short: 'Basis', weeks: [1, 2, 3] }, { name: 'Deload', short: 'Ruhe', weeks: [4] }, { name: 'Maximalkraft', short: 'Max', weeks: [5, 6, 7] },
+  { name: 'Deload', short: 'Ruhe', weeks: [8] }, { name: 'Power', short: 'Power', weeks: [9, 10, 11] }, { name: 'Test', short: 'Test', weeks: [12] },
+];
+const boardWeekLayout = ['A', 'B', 'E', 'C', 'E', 'D', 'E']; // Mo … So
+const boardToday = { week: 5, day: 0 };
+const boardInitialExercises = [
+  { id: 'w', name: 'Warm-up-Routine', pres: '20 min · locker → RPE 6', sets: 1, done: [true], core: true },
+  { id: 'h', name: 'Max Hangs 20 mm', pres: '10 s · Pause 3:00 · +15–20 kg · RPE 9', sets: 6, done: [true, true, true, false, false, false], core: true },
+  { id: 'l', name: 'Moonboard 40° Limit', pres: '6 Probleme · 3–4 Versuche · 7a+–7b+', sets: 6, noPrefix: true, done: [false, false, false, false, false, false], core: true },
+  { id: 'p', name: 'Gewichtete Klimmzüge', pres: '3 Wdh. · Pause 3:00 · +25–35 kg', sets: 5, done: [false, false, false, false, false], core: false },
+  { id: 'c', name: 'Cool-down', pres: '5–10 min · locker', sets: 1, done: [false], core: false },
+];
+function boardStatus(week, day) {
+  const t = boardWeekLayout[day];
+  if (week < boardToday.week) {
+    if (t === 'E') return week === 3 && day === 2 ? 'done' : 'off';
+    if (week === 2 && day === 5) return 'skipped';
+    if (week === 4 && day === 3) return 'partial';
+    return 'done';
+  }
+  if (week === boardToday.week && day === boardToday.day) return 'today';
+  return 'open';
+}
+
+// ---------- Bausteine ----------
+const boardStyles = {
+  screen: { minHeight: '100%', background: '#0D0E0E', color: '#ECECEC', fontFamily: '"Familjen Grotesk", -apple-system, sans-serif',
+    backgroundImage: 'radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,.07) 1.4px, transparent 1.6px)', backgroundSize: '22px 22px' },
+  mono: { fontFamily: '"IBM Plex Mono", ui-monospace, monospace' },
+  muted: '#8E9295',
+  line: 'rgba(255,255,255,.08)',
+};
+
+/** LED-Griff: der Ring leuchtet in der Farbe des Session-Typs. */
+function BoardHold({ color, state = 'open', size = 34, label, onClick, title }) {
+  const lit = state === 'done' || state === 'on';
+  const ring = state === 'skipped' ? 'rgba(255,255,255,.25)' : color;
+  const style = {
+    width: size, height: size, borderRadius: '50%', flex: 'none', position: 'relative',
+    display: 'grid', placeItems: 'center',
+    border: `${Math.max(2, size / 11)}px ${state === 'skipped' ? 'dashed' : 'solid'} ${ring}`,
+    opacity: state === 'open' ? 0.55 : state === 'off' ? 0.18 : 1,
+    background: lit ? `radial-gradient(circle, ${color} 0 30%, ${color}55 60%, transparent 72%)` : state === 'partial' ? `linear-gradient(90deg, ${color}66 50%, transparent 50%)` : '#151617',
+    boxShadow: lit ? `0 0 ${size / 2.4}px ${color}AA, inset 0 0 ${size / 4}px ${color}88` : 'none',
+    color: lit ? '#0D0E0E' : '#ECECEC', fontFamily: '"IBM Plex Mono", monospace', fontWeight: 600, fontSize: size * 0.36,
+    transition: 'all .2s',
+  };
+  if (state === 'today') Object.assign(style, { border: '3px solid #fff', opacity: 1, animation: 'boardPulse 2s infinite', background: `radial-gradient(circle, ${color} 0 26%, transparent 30%)` });
+  const Tag = onClick ? 'button' : 'div';
+  return <Tag onClick={onClick} title={title} aria-label={title} style={style}>{label}</Tag>;
+}
+
+function BoardTabBar({ screen, onTab }) {
+  const tabs = [['today', 'Heute'], ['board', 'Board'], ['check', 'Check-in'], ['stats', 'Werte']];
+  return (
+    <div style={{ position: 'sticky', bottom: 0, display: 'flex', background: 'rgba(13,14,14,.94)', borderTop: `1px solid ${boardStyles.line}`, padding: '8px 10px 6px', backdropFilter: 'blur(14px)' }}>
+      {tabs.map(([id, label]) => (
+        <button key={id} onClick={() => onTab(id)} style={{ flex: 1, minHeight: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, color: screen === id ? '#fff' : boardStyles.muted }}>
+          <span style={{ width: 10, height: 10, borderRadius: '50%', border: `2px solid ${screen === id ? '#fff' : '#555'}`, boxShadow: screen === id ? '0 0 8px #fff' : 'none' }} />
+          <span style={{ fontSize: 12, fontWeight: 600 }}>{label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// ---------- Heute ----------
+function BoardToday({ exercises, setExercises }) {
+  const c = boardLed.A;
+  const core = exercises.filter((e) => e.core);
+  const doneCore = core.filter((e) => e.done.every(Boolean)).length;
+  const toggleAll = (id) => setExercises((xs) => xs.map((e) => e.id === id ? { ...e, done: e.done.map(() => !e.done.every(Boolean)) } : e));
+  const toggleSet = (id, i) => setExercises((xs) => xs.map((e) => e.id === id ? { ...e, done: e.done.map((d, j) => j === i ? !d : d) } : e));
+  return (
+    <div style={{ padding: '10px 20px 24px' }}>
+      {/* Wochenreihe des Boards: Mo–So als Griffe */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 0 16px', borderBottom: `1px solid ${boardStyles.line}` }}>
+        <div style={{ ...boardStyles.mono, fontSize: 12, color: boardStyles.muted, width: 34 }}>R5</div>
+        {boardWeekLayout.map((t, d) => (
+          <div key={d} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+            <BoardHold color={boardLed[t]} state={d === 0 ? 'today' : t === 'E' ? 'off' : 'open'} size={t === 'E' ? 18 : 28} />
+            <span style={{ ...boardStyles.mono, fontSize: 12, color: d === 0 ? '#fff' : boardStyles.muted }}>{['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'][d]}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginTop: 22 }}>
+        <div>
+          <div style={{ ...boardStyles.mono, fontSize: 13, color: c }}>A · Woche 5 · Maximalkraft</div>
+          <div style={{ fontSize: 36, fontWeight: 700, letterSpacing: -0.8, lineHeight: 1.05, marginTop: 6 }}>Limit &<br />Finger</div>
+        </div>
+        <div style={{ textAlign: 'right' }}>
+          <div style={{ ...boardStyles.mono, fontSize: 34, fontWeight: 600, color: c, textShadow: `0 0 18px ${c}88` }}>{doneCore}/{core.length}</div>
+          <div style={{ fontSize: 13, color: boardStyles.muted }}>Kernübungen</div>
+        </div>
+      </div>
+      <div style={{ fontSize: 14, color: boardStyles.muted, marginTop: 8 }}>Montag, 24. November · ≈ 2 h</div>
+
+      <div style={{ marginTop: 18 }}>
+        {exercises.map((e) => {
+          const all = e.done.every(Boolean);
+          return (
+            <div key={e.id} style={{ padding: '14px 0', borderTop: `1px solid ${boardStyles.line}` }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                <BoardHold color={c} state={all ? 'done' : 'open'} size={52} onClick={() => toggleAll(e.id)} title={`${e.name} abhaken`} label={all ? '' : ''} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 17, fontWeight: 600, color: all ? boardStyles.muted : '#fff', textDecoration: all ? 'line-through' : 'none' }}>
+                    {e.name}{e.core && <span style={{ color: c, marginLeft: 6, fontSize: 13 }}>●</span>}
+                  </div>
+                  <div style={{ ...boardStyles.mono, fontSize: 12.5, color: boardStyles.muted, marginTop: 3 }}>{e.sets > 1 && !e.noPrefix ? `${e.sets} × ` : ''}{e.pres}</div>
+                </div>
+              </div>
+              {e.sets > 1 && (
+                <div style={{ display: 'flex', gap: 10, marginTop: 12, paddingLeft: 66 }}>
+                  {e.done.map((d, i) => (
+                    <BoardHold key={i} color={c} state={d ? 'done' : 'open'} size={36} label={d ? '' : i + 1} onClick={() => toggleSet(e.id, i)} title={`Satz ${i + 1}`} />
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Board (12-Wochen-Plan) ----------
+function BoardPlan() {
+  const [sel, setSel] = React.useState({ week: 5, day: 0 });
+  const weeks = Array.from({ length: 12 }, (_, i) => 12 - i);
+  const phaseOf = (w) => boardPhases.find((p) => p.weeks.includes(w));
+  const selType = boardWeekLayout[sel.day];
+  const st = boardStatus(sel.week, sel.day);
+  return (
+    <div style={{ padding: '10px 16px 20px' }}>
+      <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.6, lineHeight: 1.08, padding: '4px 4px 0' }}>12 Reihen.<br />Ein Projekt.</div>
+      <div style={{ fontSize: 14, color: boardStyles.muted, margin: '8px 4px 14px' }}>Jede Session ist ein Griff. Du bist in Reihe 5.</div>
+      <div style={{ display: 'grid', gridTemplateColumns: '72px repeat(7, 1fr)', rowGap: 5, alignItems: 'center' }}>
+        <div />
+        {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map((d) => <div key={d} style={{ ...boardStyles.mono, fontSize: 12, color: boardStyles.muted, textAlign: 'center' }}>{d}</div>)}
+        {weeks.map((w) => {
+          const ph = phaseOf(w);
+          const first = ph.weeks[ph.weeks.length - 1] === w;
+          return (
+            <React.Fragment key={w}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 34 }}>
+                <span style={{ ...boardStyles.mono, fontSize: 12.5, width: 20, textAlign: 'right', color: w === 5 ? '#fff' : boardStyles.muted, fontWeight: w === 5 ? 600 : 400 }}>{w}</span>
+                <span style={{ fontSize: 12, color: w === 5 ? '#fff' : boardStyles.muted, whiteSpace: 'nowrap', width: 44, borderLeft: `2px solid ${first ? '#444' : 'transparent'}`, paddingLeft: 5 }}>{first ? ph.short : ''}</span>
+              </div>
+              {boardWeekLayout.map((t, d) => (
+                <div key={d} style={{ display: 'grid', placeItems: 'center' }}>
+                  <BoardHold color={boardLed[t]} size={t === 'E' ? 14 : 26}
+                    state={boardStatus(w, d) === 'today' ? 'today' : boardStatus(w, d)}
+                    onClick={() => setSel({ week: w, day: d })} title={`Woche ${w}, ${t}`} />
+                </div>
+              ))}
+            </React.Fragment>
+          );
+        })}
+      </div>
+      <div style={{ marginTop: 16, padding: 14, borderRadius: 14, background: '#151617', border: `1px solid ${boardStyles.line}`, display: 'flex', gap: 14, alignItems: 'center' }}>
+        <BoardHold color={boardLed[selType]} size={44} state={st === 'today' ? 'today' : st === 'off' ? 'open' : st} />
+        <div>
+          <div style={{ fontSize: 16, fontWeight: 600 }}>{selType} · {boardTypeName[selType]}</div>
+          <div style={{ ...boardStyles.mono, fontSize: 12.5, color: boardStyles.muted, marginTop: 3 }}>
+            Woche {sel.week} · {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'][sel.day]} · {{ done: 'erledigt', today: 'heute', open: 'offen', skipped: 'übersprungen', partial: 'teilweise', off: 'optional' }[st]}
+          </div>
+        </div>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: 14 }}>
+        {['A', 'B', 'C', 'D'].map((t) => (
+          <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 13, color: '#cfcfcf' }}>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: boardLed[t], boxShadow: `0 0 8px ${boardLed[t]}` }} />{boardTypeName[t]}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Check-in ----------
+function BoardCheckIn() {
+  const [v, setV] = React.useState({ s: 4, e: 3, f: 4 });
+  const low = Math.min(v.s, v.e, v.f) <= 2;
+  const rows = [['s', 'Schlaf'], ['e', 'Energie'], ['f', 'Haut & Finger']];
+  return (
+    <div style={{ padding: '14px 20px 24px' }}>
+      <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.6, lineHeight: 1.1 }}>Wie viele Griffe<br />leuchten heute?</div>
+      <div style={{ fontSize: 14, color: boardStyles.muted, marginTop: 8 }}>Vor der Session · 1 bis 5</div>
+      {rows.map(([k, label]) => (
+        <div key={k} style={{ marginTop: 26 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 16, fontWeight: 600 }}>
+            <span>{label}</span><span style={{ ...boardStyles.mono, color: boardStyles.muted }}>{v[k]}/5</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 12 }}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <BoardHold key={n} size={52} color={v[k] <= 2 ? '#FF9B1F' : '#3CF06B'} state={n <= v[k] ? 'done' : 'open'}
+                onClick={() => setV({ ...v, [k]: n })} title={`${label} ${n}`} label={n <= v[k] ? '' : n} />
+            ))}
+          </div>
+        </div>
+      ))}
+      <div style={{ marginTop: 30, padding: '16px 16px', borderRadius: 14, border: `1px solid ${low ? '#FF9B1F' : '#3CF06B'}66`, background: '#151617' }}>
+        <div style={{ fontSize: 19, fontWeight: 700, color: low ? '#FF9B1F' : '#3CF06B' }}>{low ? 'Leichte Variante.' : 'Volles Programm.'}</div>
+        <div style={{ fontSize: 14, color: '#cfcfcf', marginTop: 4 }}>{low ? '−1 Satz pro Übung, Limit-Boulder bleiben aus.' : 'Max Hangs mit Zusatzgewicht, Limit-Versuche frei.'}</div>
+      </div>
+      <button style={{ width: '100%', minHeight: 56, marginTop: 14, borderRadius: 14, background: '#fff', color: '#0D0E0E', fontSize: 17, fontWeight: 700 }}>Session starten</button>
+    </div>
+  );
+}
+
+function BoardStats() {
+  const done = [1, 1, 1, 0.75, 0.5, 0, 0, 0, 0, 0, 0, 0];
+  const bench = [['Max Hang 20 mm', '+12,5', '—'], ['3RM Klimmzug', '+22,5', '—'], ['Moonboard', '7a+', '—'], ['Kilter 40°', '7a+', '—']];
+  return (
+    <div style={{ padding: '14px 20px 24px' }}>
+      <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.6 }}>Werte</div>
+      <div style={{ display: 'flex', gap: 6, marginTop: 18, alignItems: 'flex-end', height: 90 }}>
+        {done.map((r, i) => <div key={i} style={{ flex: 1, height: `${Math.max(r * 100, 4)}%`, borderRadius: 4, background: i === 4 ? '#fff' : r ? boardLed.A : '#222' }} />)}
+      </div>
+      <div style={{ ...boardStyles.mono, fontSize: 12, color: boardStyles.muted, marginTop: 6 }}>W1 ··· W12 · Abschluss pro Woche</div>
+      {bench.map(([n, a, b]) => (
+        <div key={n} style={{ display: 'flex', justifyContent: 'space-between', padding: '16px 0', borderTop: `1px solid ${boardStyles.line}`, marginTop: n === bench[0][0] ? 20 : 0 }}>
+          <span style={{ fontSize: 16 }}>{n}</span><span style={{ ...boardStyles.mono, fontSize: 15 }}>{a} <span style={{ color: boardStyles.muted }}>→ {b}</span></span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ---------- Telefon mit eigenem Zustand ----------
+function BoardPhone({ initial }) {
+  const [screen, setScreen] = React.useState(initial);
+  const [exercises, setExercises] = React.useState(boardInitialExercises);
+  return (
+    <IosFrame darkMode screenBg="#0D0E0E">
+      <div style={{ ...boardStyles.screen, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          {screen === 'today' && <BoardToday exercises={exercises} setExercises={setExercises} />}
+          {screen === 'board' && <BoardPlan />}
+          {screen === 'check' && <BoardCheckIn />}
+          {screen === 'stats' && <BoardStats />}
+        </div>
+        <BoardTabBar screen={screen} onTab={setScreen} />
+      </div>
+    </IosFrame>
+  );
+}
+
+// ---------- Tafel ----------
+function BoardShowcase() {
+  const P = 0.92;
+  const label = (t, n) => (
+    <div style={{ marginBottom: 12 }}>
+      <div style={{ fontSize: 17, fontWeight: 700, color: '#fff' }}>{t}</div>
+      <div style={{ fontSize: 14, color: '#8E9295', marginTop: 2, maxWidth: 360 }}>{n}</div>
+    </div>
+  );
+  const phone = (initial) => (
+    <div style={{ width: 417 * P, height: 876 * P }}>
+      <div style={{ transform: `scale(${P})`, transformOrigin: '0 0', width: 417 }}><BoardPhone initial={initial} /></div>
+    </div>
+  );
+  return (
+    <div style={{ width: 1440, minHeight: 1300, background: '#0B0C0C', color: '#ECECEC', position: 'relative', overflow: 'hidden',
+      backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,.06) 1.8px, transparent 2px)', backgroundSize: '44px 44px' }}>
+      <div style={{ position: 'absolute', left: 64, top: 64, width: 520 }}>
+        <div style={{ fontFamily: '"IBM Plex Mono", monospace', fontSize: 14, color: boardLed.A }}>Richtung 1</div>
+        <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: -2, lineHeight: 1, marginTop: 10 }}>Das Board</div>
+        <div style={{ fontSize: 17, lineHeight: 1.6, color: '#cfcfcf', marginTop: 20 }}>
+          Ein Kilter- oder Moonboard ist ein Raster aus Löchern mit LED-Ringen. Genau so sieht hier der Plan aus:
+          12 Reihen sind 12 Wochen, jede Session ein Griff, der leuchtet, wenn sie erledigt ist. Abhaken heißt: einen Griff anschalten.
+        </div>
+        <div style={{ display: 'flex', gap: 22, marginTop: 30 }}>
+          {['A', 'B', 'C', 'D'].map((t) => (
+            <div key={t} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <BoardHold color={boardLed[t]} state="done" size={40} />
+              <span style={{ fontFamily: '"IBM Plex Mono", monospace', fontSize: 13, color: '#cfcfcf' }}>{t}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{ fontSize: 14, color: '#8E9295', marginTop: 14, lineHeight: 1.55 }}>Farben = LED-Farben der Boards: Magenta, Cyan, Grün, Orange. Schrift: Familjen Grotesk + IBM Plex Mono für Koordinaten.</div>
+        <div style={{ fontSize: 13, color: '#8E9295', marginTop: 40, lineHeight: 1.55, borderTop: '1px solid rgba(255,255,255,.1)', paddingTop: 16 }}>
+          Quelle: Wim Crouwel (Raster als einziges Ordnungsprinzip). Die Form selbst kommt aus dem Trainingsgerät.
+        </div>
+      </div>
+      <div style={{ position: 'absolute', left: 640, top: 64 }}>
+        {label('Heute', 'Checkbox = LED-Ring. Jeder Satz ist ein Griff, oben die Wochenreihe.')}
+        {phone('today')}
+      </div>
+      <div style={{ position: 'absolute', left: 1036, top: 150 }}>
+        {label('Board', '12 Wochen als Problem. Griff antippen zeigt die Session.')}
+        {phone('board')}
+      </div>
+      <div style={{ position: 'absolute', left: 64, top: 640 }}>
+        {label('Check-in', 'Bewertung = wie viele Griffe leuchten.')}
+        <div style={{ width: 417 * 0.72, height: 876 * 0.72 }}>
+          <div style={{ transform: 'scale(0.72)', transformOrigin: '0 0', width: 417 }}><BoardPhone initial="check" /></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<BoardShowcase />);
+</script>
+</body>
+</html>
